@@ -1,0 +1,125 @@
+table, th, td { width: 100%;
+}
+
+body{
+  background: #FFFFFF;
+}
+
+.logo img{
+  margin-top: 10px;
+  width: 100px;
+  height: 70px;
+  margin-right: 800px;
+  float: left;
+  margin-left: 10%;
+}
+
+.border1{
+  background-color: rgba(255, 166, 0, 0.678);
+  /*background-color: white;*/
+  width: 100%;
+  height: 15px;
+}
+
+/* navbar */
+.navbar-default {
+  float: right;
+  margin-right: 0px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: rgb(0, 0, 0);
+  font-size: 120%;
+}
+/* Title */
+.navbar-default .navbar-brand {
+  color: rgb(0, 0, 0);
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #5E5E5E;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+  background-color: white;
+  border-radius:25px;
+  color: black;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  background-color: white;
+  border-radius:25px;
+  color: orange;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: orange;
+  border-radius:25px;
+  color: white;
+  /*color: #555;
+  background-color: #E7E7E7;*/
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table th {
+  text-align: left;
+  color: rgb(0, 0, 0);
+  padding: 4px 30px 4px 8px;
+}
+.collapsible {
+  background-color: rgba(255, 155, 0, 1);;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.colactive,
+.collapsible:hover {
+  background-color: rgba(255, 155, 0, 0.8);
+}
+
+.collapsible:after {
+  content: "\002B";
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.colactive:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color:white;
+}
+table td {
+  border: 1px solid white;
+  padding: 4px 8px;
+}
+
+
+tbody tr:nth-child(odd) {
+  background-color: white;
+  padding: 4px 30px 4px 8px;
+}
+
+thead th {
+  text-align: left;
+  background-color: rgb(218, 218, 218);
+  color: rgb(0, 0, 0);
+  padding: 4px 30px 4px 8px;
+}

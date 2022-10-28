@@ -1,0 +1,209 @@
+<%- include("./partials/NFBheaderSectionThree") %>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<div class="ui main text container">
+  <div class="ui huge header">Audit Checklist</div>
+  <h2>The Non-F&B Audit Checklist</h2>
+  <form
+    class="ui form"
+    action="/Non-F&B-ChecklistSectionThreeSubmission"
+    method="POST"
+    onsubmit="submissionOfAuditList()"
+  >
+    <table>
+      <input
+        type="hidden"
+        name="checklist[sessionEmail]"
+        value="<%=sessionLogin %>"
+      />
+      <input type="hidden" id="TotalQuestions" value="<%=totalQn%>" />
+      <tr>
+        <th>5. Workplace Safety & Health (20%)</th>
+        <th>Point(s) Awarded</th>
+      </tr>
+      <tr>
+        <td>General Safety</td>
+        <td></td>
+      </tr>
+
+      <% for(var i=0; i<SectionFiveFBGeneralSafety.length; i++) { %>
+        <tr>
+          <td>
+            <%=SectionFiveFBGeneralSafety[i]%>
+          </td>
+          <td>
+            <select 
+              class="questions5"
+              onchange="getPoints()">
+              <option value="1">1</option>
+              <option value="0">0</option>
+              <option value="N/A">N/A</option>
+            </select>
+          </td>
+        </tr>
+        <% } %>
+
+      <tr>
+        <td>Fire & Emergency Safety</td>
+        <td></td>
+      </tr>
+
+      <% for(var i=0; i<SectionFiveFBFireSafety.length; i++) { %>
+        <tr>
+          <td>
+            <%=SectionFiveFBFireSafety[i]%>
+          </td>
+          <td>
+            <select 
+              class="questions5"
+              onchange="getPoints()">
+              <option value="1">1</option>
+              <option value="0">0</option>
+              <option value="N/A">N/A</option>
+            </select>
+          </td>
+        </tr>
+      <% } %>
+
+      <tr>
+        <td>Electrical Safety</td>
+        <td></td>
+      </tr>
+
+      <% for(var i=0; i<SectionFiveFBElectricalSafety.length; i++) { %>
+        <tr>
+          <td>
+            <%=SectionFiveFBElectricalSafety[i]%>
+          </td>
+          <td>
+            <select 
+              class="questions5"
+              onchange="getPoints()">
+              <option value="1">1</option>
+              <option value="0">0</option>
+              <option value="N/A">N/A</option>
+            </select>
+          </td>
+        </tr>
+      <% } %>
+      <tr>
+        <td>Score:</td>
+        <td>
+          <input
+            name="checklist[SectionFiveTotal]"
+            id="total5"
+            value="0"
+            min="10"
+            max="1"
+            readonly
+          />
+        </td>
+        <script>
+          function getFinalScore()
+          {
+            var list1 = document.getElementsByClassName("questions5");
+            document.getElementById("total5").value = list1.length;
+          }
+          window.onload = getFinalScore();
+        </script>
+      </tr>
+    </table>
+    <h2>Remarks</h2>
+    <textarea
+      name="checklist[SectionFiveRemarks]"
+      id="checklistRemarkSectionFive"
+      type="text"
+      placeholder="Type Here"
+      class="remarksTextBox"
+      rows="5"
+      cols="30"
+    ></textarea>
+    <input
+      type="button"
+      class="ui violet big basic button"
+      value="Previous Section"
+      onclick="location.href='/Non-F&B-ChecklistSectionThree';"
+    />
+    <input
+      class="ui violet big basic button"
+      type="submit"
+      value="Next Section"
+    />
+  <script type="text/javascript">
+    function getPoints() {
+      var arr5 = document.getElementsByClassName("questions5");
+      var tot5 = 0;
+      for (var i = 0; i < arr5.length; i++) {
+        var data = arr5[i].value;
+        if (data == 1) {
+          tot5++;
+        } else if (data == 0) {
+          tot5 = tot5;
+        } else {
+          //totalQn -= 1;
+        }
+      }
+      document.getElementById("total5").value = tot5;
+      //console.log("XSRFTOKEN is :" + Cookies.get("XSRF-TOKEN"));
+    }
+  </script>
+
+  <script>
+    /*
+    var importedData = <%- JSON.stringify(convCheckListData)%>;
+    let count = 0;
+    for(let key in importedData)
+    {
+      count++;
+    }
+    if(count != 0)
+    {
+      updateCheckList(importedData);
+    }
+
+    function selectElement(id, valueToChange) {
+      //console.log("Change ID: " + id + "Change data: " + valueToChange);
+      let element = document.getElementById(id);
+      element.value = valueToChange;
+    }
+    function updateCheckList(checklist) {
+      selectElement("total3", checklist["SectionThreeTotal"]);
+      selectElement("19", checklist["19"]);
+      selectElement("20", checklist["20"]);
+      selectElement("21", checklist["21"]);
+      selectElement("22", checklist["22"]);
+      selectElement("23", checklist["23"]);
+      selectElement("24", checklist["24"]);
+      selectElement("25", checklist["25"]);
+      selectElement("26", checklist["26"]);
+      selectElement("27", checklist["27"]);
+      selectElement("28", checklist["28"]);
+      selectElement("29", checklist["29"]);
+      selectElement("30", checklist["30"]);
+      selectElement("31", checklist["31"]);
+      selectElement("32", checklist["32"]);
+      selectElement("33", checklist["33"]);
+      selectElement("34", checklist["34"]);
+      if(checklist["SectionThreeRemarks"] != undefined)
+      {
+        selectElement("checklistRemarkSectionThree", checklist["SectionThreeRemarks"])
+      }
+    }
+    */
+  </script>
+
+  <script>
+    function submissionOfAuditList() {
+      alert("Audit list successfully updated");
+    }
+  </script>
+
+  <script>
+    var total = parseInt(document.getElementById("TotalQuestions").value);
+    var list1 = document.getElementsByClassName("questions5");
+    for (var i = 0; i < list1.length; i++) {
+      list1[i].name = "checklist[" + (i + 1 + total) + "]";
+      list1[i].id = i + 1 + total;
+    }
+  </script>
+</div>
+<%- include("./partials/footer") %>

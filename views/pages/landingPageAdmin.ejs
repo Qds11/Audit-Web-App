@@ -1,0 +1,179 @@
+<html></html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SingHealth</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/landingPage.css">
+    <style>
+      .navbar-default {
+        float: right;
+        margin-right: 0px;
+        margin-top: 20px;
+        background-color: #ffffff;
+        border-color: #ffffff;
+        color: rgb(0, 0, 0);
+        font-size: 120%;
+      }
+      @media only screen and (max-width: 780px) {
+        .logo img{
+          margin:auto;
+          padding-top: 25px;
+          padding-left: 15px;
+          width: 160px;
+          height: 160px;
+          margin-left: 7%;
+          float: left;
+        }
+        .border1{
+          background-color: rgba(255, 166, 0, 0.678);
+          /*background-color: white;*/
+          width: 106%;
+          height: 10px;
+        }
+        .navbar-default {
+          float: right;
+          margin: auto;
+          margin-right: 10%;
+          margin-top: 00%;
+          background-color: #ffffff;
+          border-color: #ffffff;
+          color: rgb(0, 0, 0);
+          font-size: 90%;
+        }
+      }  
+    </style>
+</head>
+<body>
+  <div class="row">
+    <div class="header">
+        <div class="logo">
+          <div class="col-sm-4">
+            <a href="/landingPage"><img src="Images/logo.png" alt="SingHealth Logo"></a>
+            <!--<li>please add a link for this picture to return to landing page</li>-->
+            </div>
+          </div>
+          <div class="col-sm-8">
+        <nav class="navbar navbar-default">
+        
+           
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Create New Checklist
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                  <li><a href="/F&B-ChecklistSectionOne">F&B Checklist</a></li>
+                  <li><a href="/Non-F&B-ChecklistSectionOne">Non-F&B Checklist</a></li>
+          
+                </ul>
+              </li>
+              <li><a href="/RegisteredAccounts">Registered accounts</a></li>
+              <li><a href="/EditChecklistQuestions">Edit Checklist Questions</a></li>
+              <li><a href="/F&B-History">History</a></li>
+              <li><a href="/sessionLogout">Sign out</a></li>
+             
+            </ul>
+       
+        </nav>
+      </div>
+    </div>
+  </div>
+    <div class="border1"></div>
+    <div class="show">
+        
+       <h1>Please Fill in the Checklist</h1>
+       
+       
+       <img src="Images/show.jpg"/>
+       
+       <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Create New Checklist
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="/F&B-ChecklistSectionOne">F&B Checklist</a></li>
+          <li><a href="/Non-F&B-ChecklistSectionOne">Non-F&B Checklist</a></li>
+         
+        </ul>
+      </div>
+      <div class="summary">
+        <!--<li>please add a link for this button to return to create a new checklist</li>-->
+        <ul class="list-group">
+ 
+         <li class="list-group-item list-group-item-danger ">
+         Recently Created F&B Checklist
+         <!--<span class="badge badge-primary badge-pill">Score</span>-->
+         </li>
+         
+         <% for(var i=0; i<FNBLandingPageData.length; i++) { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <!--<span class="badge badge-primary badge-pill">14</span>-->
+            <%=FNBLandingPageData[i]%>
+          </li>
+          <% } %>
+ 
+         <li class="list-group-item list-group-item-danger ">
+           Recently Created Non-F&B Checklist
+           <!--<span class="badge badge-primary badge-pill">Score</span>-->
+         </li>
+ 
+         <% for(var i=0; i<NonFNBLandingPageData.length; i++) { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <!--<span class="badge badge-primary badge-pill">14</span>-->
+            <%=NonFNBLandingPageData[i]%>
+          </li>
+          <% } %>
+ 
+       </ul>
+       <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+       <script id="Mainscript">
+         function addItemToList1(name){
+           var ul=document.getElementById('list1');
+           //var header=document.createElement('h2');
+
+           var _name=document.createElement('p');
+           //var _score=document.createElement('p');
+           
+           _name.innerHTML=name;
+           //_score.innerHTML=score;
+
+           ul.appendChild(_name);
+           //ul.appendChild(_score);
+         }
+
+         function addItemToList2(name){
+           var ul=document.getElementById('list2');
+
+           var _name=document.createElement('li');
+          // var _name=document.createElement('li');
+           
+           _name.innerHTML=name;
+           //_score.innerHTML=score;
+
+           ul.appendChild(_name);
+           //ul.appendChild(_score);
+         }
+       </script>
+
+       </div>
+     </div>
+    <div class="border2"></div>
+    <div class="footer">
+        <!--Copyright&copy2020
+        <br />
+        E-main:sample@sample.com
+        <br />
+        Tel:123456789
+        <br/>-->
+    </div>
+</body>
+<script>
+  localStorage.clear();
+</script>
+</html>

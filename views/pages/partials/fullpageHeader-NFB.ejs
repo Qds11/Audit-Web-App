@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audit Checklist</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <style>
+      input[type="checkbox"] + label::before {
+        content: "\2714";
+        border: 0.1em solid #000000;
+        border-radius: 0.2em;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        padding-left: 0.2em;
+        padding-bottom: 0.3em;
+        margin-right: 0.2em;
+      }
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 10px;
+        
+      }
+
+     /* tr:nth-child(2) {
+        background-color: #add1b0;
+      }
+      tr:nth-child(6) {
+        background-color: #add1b0;
+      }
+      tr:nth-child(10) {
+        background-color: #dddddd;
+      }
+      tr:nth-child(11) {
+        background-color: #dddddd;
+      }
+      tr:nth-child(12) {
+        background-color: #add1b0;
+      }
+      tr:nth-child(14) {
+        background-color: #add1b0;
+      }
+      tr:nth-child(28) {
+        background-color:  #dddddd;
+      }
+      tr:nth-child(27) {
+        background-color: #dddddd;
+      }
+    
+    
+      tr:nth-child(49) {
+        background-color: #dddddd;
+      }
+      tr:nth-child(50) {
+        background-color: #dddddd;
+      }
+      tr:nth-child(30) {
+        background-color: #add1b0;
+      }
+     
+      tr:nth-child(40) {
+        background-color: #add1b0;
+      }
+      tr:nth-child(44) {
+        background-color: #add1b0;
+      }*/
+      
+      .logo img {
+        width: 100px;
+        height: 70px;
+        margin-right: 800px;
+        float: left;
+        margin-left: 10%;
+      }
+      .border1 {
+        margin-bottom: 2%;
+        background-color: rgba(255, 166, 0, 0.678);
+        width: 100%;
+        height: 10px;
+      }
+      /* navbar */
+      .navbar-default {
+        float: right;
+        margin-right: 10%;
+        padding-top: 2%;
+        background-color: #ffffff;
+        border-color: #ffffff;
+        color: rgb(0, 0, 0);
+        font-size: 120%;
+      }
+      /* Title */
+      .navbar-default .navbar-brand {
+        color: rgb(0, 0, 0);
+      }
+      .navbar-default .navbar-brand:hover,
+      .navbar-default .navbar-brand:focus {
+        color: #5e5e5e;
+      }
+      /* Link */
+      .navbar-default .navbar-nav > li > a {
+        color: #777;
+      }
+      .navbar-default .navbar-nav > li > a:hover,
+      .navbar-default .navbar-nav > li > a:focus {
+        color: #333;
+      }
+      .navbar-default .navbar-nav > .active > a,
+      .navbar-default .navbar-nav > .active > a:hover,
+      .navbar-default .navbar-nav > .active > a:focus {
+        color: #555;
+        background-color: #e7e7e7;
+      }
+      .navbar-default .navbar-nav > .open > a,
+      .navbar-default .navbar-nav > .open > a:hover,
+      .navbar-default .navbar-nav > .open > a:focus {
+        color: #555;
+        background-color: #d5d5d5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="header">
+        <div class="logo">
+          <div class="col-sm-4">
+            <a href="#"><img src="Images/logo.png" alt="SingHealth Logo" /></a>
+            <!--<li>please add a link for this picture to return to landing page</li>-->
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/landingPage">Home</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                  >Create New Checklist <span class="caret"></span
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/F&B-ChecklistSectionOne">F&B Checklist</a></li>
+                  <li>
+                    <a href="/Non-F&B-ChecklistSectionOne">Non-F&B Checklist</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="/F&B-History">History</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="border1"></div>
+  </body>
+</html>

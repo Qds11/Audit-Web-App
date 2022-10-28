@@ -1,0 +1,592 @@
+<%- include("./partials/FBheaderSectionOne") %>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<div class="ui main text container">
+  <div class="ui huge header">Edit Audit Checklist</div>
+  <h2>Edit F&B Audit Checklist</h2>
+  <form
+    class="ui form"
+    action="/editF&BAuditFormsSectionTwo/<%= dataID %>"
+    method="POST"
+    onsubmit="return checkForMissingFields()"
+  >
+  <style>
+    @media only screen and (max-width: 780px) {
+      table, td, tr{
+        width: 100%;
+      }
+      .logo img{
+        margin:auto;
+        padding-top: 25px;
+        padding-left: 15px;
+        width: 160px;
+        height: 160px;
+        margin-left: 7%;
+        float: left;
+      }
+      .border1{
+        background-color: rgba(255, 166, 0, 0.678);
+        /*background-color: white;*/
+        width: 100%;
+        height: 10px;
+      }
+      .navbar-default {
+        float: right;
+        margin: auto;
+        margin-right: 10%;
+        margin-top: 00%;
+        background-color: #ffffff;
+        border-color: #ffffff;
+        color: rgb(0, 0, 0);
+        font-size: 90%;
+      }
+      /* Title */
+      .navbar-default .navbar-brand {
+        color: rgb(0, 0, 0);
+      }
+      .navbar-default .navbar-brand:hover,
+      .navbar-default .navbar-brand:focus {
+        color: #5E5E5E;
+      }
+      /* Link */
+      .navbar-default .navbar-nav > li > a {
+        background-color: white;
+        border-radius:25px;
+        color: black;
+      }
+      .navbar-default .navbar-nav > li > a:hover,
+      .navbar-default .navbar-nav > li > a:focus {
+        background-color: white;
+        border-radius:25px;
+        color: orange;
+      }
+      .navbar-default .navbar-nav > .active > a,
+      .navbar-default .navbar-nav > .active > a:hover,
+      .navbar-default .navbar-nav > .active > a:focus {
+        background-color: orange;
+        border-radius:25px;
+        color: white;
+        /*color: #555;
+        background-color: #E7E7E7;*/
+      }
+    }
+  </style>
+    <tr>
+      <td>Name of checklist:</td>
+      <td>
+        <input
+          type="text"
+          name="checklist[AuditFormName]"
+          placeholder="Name"
+          id="AuditFormName"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Select Instituion:</td>
+      <td>
+        <select
+          name="checklist[SelectedInstituion]"
+          class="questionsInstitution"
+          id="SelectedInstituion"
+          onchange="updateRetailTenants()"
+        >
+          <option value="default"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Select Retail Tenant:</td>
+      <td>
+        <select
+          name="checklist[SelectedRetailTenant]"
+          class="questionsRetailTenant"
+          id="SelectedTenant"
+          style="width: 200px"
+        >
+          <option value="default"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <!-- <td>Send a copy of this checklist?</td>-->
+      <!--    <input type="checkbox" name="SendCopy" value="off" />-->
+    </tr>
+    <table>
+      <input
+        type="hidden"
+        name="checklist[sessionEmail]"
+        value="<%=sessionLogin %>"
+      />
+      <tr>
+        <th>1. Professionalism & Staff Hygiene (20%)</th>
+        <th>Point(s) Awarded</th>
+      </tr>
+      <tr>
+        <td class = "greenTr">Professionalism</td>
+        <td class = "greenTr"></td>
+      </tr>
+      <% for(var i=0; i<SectionOneFBProfessionalism.length; i++) { %>
+        <tr>
+          <td>
+            <%=SectionOneFBProfessionalism[i]%>
+          </td>
+          <td>
+            <select 
+              class="questions1"
+              onchange="getPoints()">
+              <option value="1">1</option>
+              <option value="0">0</option>
+              <option value="N/A">N/A</option>
+            </select>
+          </td>
+        </tr>
+      <% } %>
+      <tr>
+        <td class = "greenTr">Staff Hygiene</td>
+        <td class = "greenTr"></td>
+      </tr>
+      <% for(var i=0; i<SectionOneFBStaffHygiene.length; i++) { %>
+        <tr>
+          <td>
+            <%=SectionOneFBStaffHygiene[i]%>
+          </td>
+          <td>
+            <select 
+              class="questions1"
+              onchange="getPoints()">
+              <option value="1">1</option>
+              <option value="0">0</option>
+              <option value="N/A">N/A</option>
+            </select>
+          </td>
+        </tr>
+      <% } %>
+      <tr>
+        <td class = "greyTr">Score:</td>
+        <td>
+          <input
+                name="checklist[SectionOneTotal]"
+                id="total1"
+                value="0"
+                min="10"
+                max="1"
+                readonly
+              />
+          <script>
+            function getFinalScore()
+            {
+              var list1 = document.getElementsByClassName("questions1");
+              document.getElementById("total1").value = list1.length;
+            }
+            window.onload = getFinalScore();
+          </script>
+        </td>
+      </tr>
+    </table>
+    <h2>Remarks</h2>
+    <textarea
+    name="checklist[SectionOneRemarks]"
+    id="checklistRemarkSectionOne"
+    type="text"
+    placeholder="Type Here"
+    class="remarksTextBox"
+    rows="5"
+    cols="30"
+  ></textarea>
+  <br> <br>
+    <h3>Photo</h3>
+    <input type="file" onchange="previewFile()" id="photo" />
+    <img
+      id="image"
+      height="50%"
+      style="max-height: 350pt"
+      max-width="670pt"
+      width="50%"
+    />
+    <input
+      type="hidden"
+      id="SectionOneImage"
+      name="checklist[SectionOneImage]"
+    />
+    <br><br>
+    <button id ="Addbutton" type="button" class="btn btn-default btn-sm"  style="display:none" onclick="AddPhoto2()">
+      <span class="glyphicon glyphicon-plus-sign"></span> Add Photo
+    </button>
+    <br>
+    <input type="file" onchange="previewFile2()" id="photo2"  style="display:none"/>
+    <img
+      id="image2"
+      height="50%"
+      style="max-height: 350pt"
+      max-width="670pt"
+      width="50%"
+    />
+    <input
+      type="hidden"
+      id="SectionOneImage2"
+      name="checklist[SectionOneImage2]"
+    />
+    <br /><br />
+
+    <input
+      class="ui violet big basic button"
+      type="submit"
+      value="Next Section"
+    />
+  </form>
+  <script>
+    function AddPhoto2(){
+      document.getElementById("photo2").style="display:block"
+ 
+     }
+   </script>
+  <script>
+    var image64;
+    var imageOne=<%- JSON.stringify(FBSectionOneImage)%>;
+    var imageOne2=<%- JSON.stringify(FBSectionOneImage2)%>;
+    document.getElementById("image").src=imageOne;
+    document.getElementById("SectionOneImage").value=imageOne;
+    document.getElementById("image2").src=imageOne2;
+    document.getElementById("SectionOneImage2").value=imageOne2;
+function previewFile() { 
+    const file = document.querySelector("#photo").files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+      image64 = reader.result;
+      localStorage.setItem("FBSectionOneImage", imageOne);
+      document.getElementById("SectionOneImage").value = imageOne;
+      document.getElementById("image").src = imageOne;
+      localStorage.setItem("FBSectionOneImage2", imageOne2);
+      document.getElementById("SectionOneImage").value = imageOne2;
+      document.getElementById("image").src = imageOne2;
+    const byteSize = str => new Blob([str]).size;
+    //console.log(byteSize(image64))
+  // console.log(image64)
+  if ((byteSize(image64) >200000)){
+    alert("Photo is too large. Please select another photo.")
+    document.getElementById("image").src=""
+  }else{
+    const byteSize = str => new Blob([str]).size;
+      console.log(byteSize(image64))
+      document.getElementById("SectionOneImage").value=image64
+      console.log(image64)
+  } 
+  }, false);
+  if (file) {
+    reader.readAsDataURL(file);
+  } 
+}
+
+function previewFile2() {
+      const file = document.querySelector("#photo2").files[0];
+      const reader = new FileReader();
+      reader.addEventListener(
+        "load",
+        function () {
+          
+          image264 = reader.result;
+          localStorage.setItem("FBSectionOneImage2", image264);
+          document.getElementById("SectionOneImage2").value = image264;
+          document.getElementById("image2").src = image264;
+       
+          const byteSize = (str) => new Blob([str]).size;
+
+          if (byteSize(image264) > 200000) {
+            alert("Photo is too large. Please select another photo.");
+            document.getElementById("image2").src = "";
+            document.getElementById("Addbutton").style="display:none"
+
+          } else {
+            const byteSize = (str) => new Blob([str]).size;
+            console.log(byteSize(image264));
+            document.getElementById("SectionOneImage2").value = image264;
+            console.log(image264);
+            document.getElementById("Addbutton").style="display:none"
+          }
+        },
+        false
+      );
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyDNwNQbCspC6Wzjgu9eb9nQAp2Le2MIVJk",
+      authDomain: "auditchecklist-fc4ff.firebaseapp.com",
+      databaseURL: "https://auditchecklist-fc4ff.firebaseio.com",
+      projectId: "auditchecklist-fc4ff",
+      storageBucket: "auditchecklist-fc4ff.appspot.com",
+      messagingSenderId: "559220723165",
+      appId: "1:559220723165:web:b3b9d01676fc415538fa34",
+      measurementId: "G-2C7Z3FHH89",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  <script>
+    function selectElement(id, valueToChange) {
+      let element = document.getElementById(id);
+      element.value = valueToChange;
+    }
+    function updateCheckList(checklist) {
+      selectElement(AuditFormName, checklist[AuditFormName]);
+      selectElement(SelectedInstituion, checklist[SelectedInstitution]);
+      selectElement(SelectedTenant, checklist[SelectedRetailTenant]);
+    }
+  </script>
+
+  <script>
+    var select = document.getElementById("SelectedInstituion");
+    var arrInstitution = [
+   "SCC",
+      "RDF",
+      "SFW",
+      "FWA",
+      "WRQ"
+    ];
+    for (var i = 0; i < arrInstitution.length; i++) {
+      var option = document.createElement("option");
+      var txt = document.createTextNode(arrInstitution[i]);
+      option.appendChild(txt);
+      select.insertBefore(option, select.lastChild);
+    }
+  </script>
+
+  <script type="text/javascript">
+    function updateRetailTenants() {
+      var institution = document.getElementsByClassName("questionsInstitution");
+      var institutionName = institution[0].value;
+      var select = document.getElementById("SelectedTenant");
+      var length = select.options.length;
+      for (i = length - 1; i >= 0; i--) {
+        select.options[i] = null;
+      }
+      if  (institutionName == "SCC") {
+        var arrTenant = [
+          "7-Eleven",
+          "1983 Coffee & Toast",
+          "Starbucks",
+          "Umi Sushi",
+          "Mr Bean",
+          "Kopitiam",
+ 
+        ];
+        for (var i = 0; i < arrTenant.length; i++) {
+          var option = document.createElement("option");
+          var txt = document.createTextNode(arrTenant[i]);
+          option.appendChild(txt);
+          option.setAttribute("value", arrTenant[i]);
+          select.insertBefore(option, select.lastChild);
+        }
+      } else if (institutionName == "RDF") {
+        var arrTenant = [
+          "Mr Bean",
+          "Eu Yan Sang",
+          "Huaxia Taimaobi Centre",
+          "Mothercare",
+          "Delifrance",
+          "The Choice Gift House",
+          "Savoir",
+          "Fairprice Express",
+          "B&G LifeCasting",
+          "Triplets",
+          "Junior Page",
+
+        ];
+        for (var i = 0; i < arrTenant.length; i++) {
+          var option = document.createElement("option");
+          var txt = document.createTextNode(arrTenant[i]);
+          option.appendChild(txt);
+          option.setAttribute("value", arrTenant[i]);
+          select.insertBefore(option, select.lastChild);
+        }
+      } else if (institutionName == "SFW") {
+        var arrTenant = [
+          "Stamfles",
+          "Kopitiam",
+          "Poon Resources Pte Ltd",
+     
+        ];
+        for (var i = 0; i < arrTenant.length; i++) {
+          var option = document.createElement("option");
+          var txt = document.createTextNode(arrTenant[i]);
+          option.appendChild(txt);
+          option.setAttribute("value", arrTenant[i]);
+          select.insertBefore(option, select.lastChild);
+        }
+      } else if (institutionName == "FWA") {
+        var arrTenant = [
+          "Starbucks Coffee",
+          "FairPrice Xpress",
+          "The Caffeine Experience",
+        ];
+        for (var i = 0; i < arrTenant.length; i++) {
+          var option = document.createElement("option");
+          var txt = document.createTextNode(arrTenant[i]);
+          option.appendChild(txt);
+          option.setAttribute("value", arrTenant[i]);
+          select.insertBefore(option, select.lastChild);
+        }
+      } else if (institutionName == "WRQ") {
+        var arrTenant = [
+          "Kaki Makan",
+          "Lifeforce Limbs",
+          "Noel Gifts",
+          "Mr Bean",
+          "7-Eleven",
+          "Triplets",
+
+        ];
+        for (var i = 0; i < arrTenant.length; i++) {
+          var option = document.createElement("option");
+          var txt = document.createTextNode(arrTenant[i]);
+          option.appendChild(txt);
+          option.setAttribute("value", arrTenant[i]);
+          select.insertBefore(option, select.lastChild);
+        }
+      } 
+    }
+  </script>
+
+  <script type="text/javascript">
+    function getPoints() {
+      var arr1 = document.getElementsByClassName("questions1");
+      var tot1 = 0;
+      for (var i = 0; i < arr1.length; i++) {
+        var data = arr1[i].value;
+        if (data == 1) {
+          tot1++;
+        } else if (data == 0) {
+          tot1 = tot1;
+        } else {
+          //totalQn -= 1;
+        }
+      }
+      document.getElementById("total1").value = tot1;
+      //console.log("XSRFTOKEN is :" + Cookies.get("XSRF-TOKEN"));
+    }
+  </script>
+
+  <script>
+     var imageOne=<%- JSON.stringify( FBSectionOneImage)%>;
+  //console.log(imageOne)
+  document.getElementById("image").src=imageOne;
+  document.getElementById("SectionOneImage").value=imageOne;
+    function checkForMissingFields() {
+      if (document.getElementById("AuditFormName").value.length == 0) {
+        alert("Name field cannot be blank");
+        return false;
+      } else {
+        if (document.getElementById("SelectedInstituion").value == "default") {
+          alert("Please select an institution");
+          return false;
+        } else {
+          //alert("Audit list successfully submitted");
+          return true;
+        }
+      }
+    }
+  </script>
+
+  <script>
+    window.onload = function LoadData()
+    {
+      if(localStorage.getItem("FBSectionOneImage") != null)
+      {
+        var image64;
+        image64 = localStorage.getItem("FBSectionOneImage");
+        document.getElementById("SectionOneImage").value = image64;
+        //console.log("Getting image64 value: " + image64);
+        document.getElementById("image").src = image64;
+        document.getElementById("Addbutton").style="display:block"
+
+      }
+
+      if(localStorage.getItem("FBSectionOneImage2") != null)
+      {
+        var image264;
+        image264 = localStorage.getItem("FBSectionOneImage2");
+        document.getElementById("SectionOneImage2").value = image264;
+        //console.log("Getting image64 value: " + image64);
+        document.getElementById("image2").src = image264;
+         document.getElementById("Addbutton").style="display:none"
+
+      }
+      if(<%- JSON.stringify(FBSectionOneImage2)%> == "")
+      {
+        document.getElementById("Addbutton").style="display:block"
+      }
+    var importedData = <%- JSON.stringify(convCheckListData)%>;
+    let count = 0;
+    for(let key in importedData)
+    {
+      count++;
+    }
+    if(count != 0)
+    {
+      updateCheckList(importedData);
+    }
+
+    function selectElement(id, valueToChange) {
+      console.log("Change ID: " + id + "Change data: " + valueToChange);
+      let element = document.getElementById(id);
+      element.value = valueToChange;
+    }
+    function updateCheckList(checklist) {
+      var selectOption;
+      selectElement("AuditFormName", checklist["AuditFormName"]);
+      if(checklist["SelectedInstituion"] == "SCC")
+        selectOption = 1;
+      else if(checklist["SelectedInstituion"] == "RDF")
+        selectOption = 2;
+      else if(checklist["SelectedInstituion"] == "SFW")
+        selectOption = 3;
+      else if(checklist["SelectedInstituion"] == "FWA")
+        selectOption = 4;
+      else if(checklist["SelectedInstituion"] == "WRQ")
+        selectOption = 5;
+      document.getElementById("SelectedInstituion").selectedIndex = selectOption;
+      document.getElementById("SelectedTenant").options[0].innerHTML = checklist["SelectedRetailTenant"];
+      document.getElementById("SelectedTenant").options[0].value = checklist["SelectedRetailTenant"];
+      selectElement("total1", checklist["SectionOneTotal"]);
+      //Loop question here
+      var list1 = document.getElementsByClassName("questions1");
+      for(var i = 0; i < list1.length; i++)
+      {
+        var strI = (i+1).toString();
+        selectElement(strI, checklist[strI]);
+      }
+      if(checklist["SectionOneRemarks"] != undefined)
+      {
+        selectElement("checklistRemarkSectionOne", checklist["SectionOneRemarks"])
+      }
+    }
+  }
+  </script>
+
+  <script>
+    var list1 = document.getElementsByClassName("questions1");
+    for(var i = 0; i < list1.length;i++)
+    {
+      list1[i].name = "checklist[" + (i + 1) + "]";
+      list1[i].id = (i + 1);
+    }
+  </script>
+</div>
+<%- include("./partials/footer") %>

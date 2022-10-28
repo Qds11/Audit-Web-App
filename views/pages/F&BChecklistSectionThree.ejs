@@ -1,0 +1,358 @@
+<%- include("./partials/FBheaderSectionThree") %>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<div class="ui main text container">
+  <div class="ui huge header">Audit Checklist</div>
+  <h2>The F&B Audit Checklist</h2>
+  <form class="ui form" action="/F&B-ChecklistSectionFour" method="POST">
+    <style>
+      @media only screen and (max-width: 780px) {
+        table, td, tr{
+        width: 100%;
+        }
+        .logo img{
+          margin:auto;
+          padding-top: 25px;
+          padding-left: 15px;
+          width: 160px;
+          height: 160px;
+          margin-left: 7%;
+          float: left;
+        }
+        .border1{
+          background-color: rgba(255, 166, 0, 0.678);
+          /*background-color: white;*/
+          width: 100%;
+          height: 10px;
+        }
+        .navbar-default {
+          float: right;
+          margin: auto;
+          margin-right: 10%;
+          margin-top: 00%;
+          background-color: #ffffff;
+          border-color: #ffffff;
+          color: rgb(0, 0, 0);
+          font-size: 90%;
+        }
+        /* Title */
+        .navbar-default .navbar-brand {
+          color: rgb(0, 0, 0);
+        }
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+          color: #5E5E5E;
+        }
+        /* Link */
+        .navbar-default .navbar-nav > li > a {
+          background-color: white;
+          border-radius:25px;
+          color: black;
+        }
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+          background-color: white;
+          border-radius:25px;
+          color: orange;
+        }
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+          background-color: orange;
+          border-radius:25px;
+          color: white;
+          /*color: #555;
+          background-color: #E7E7E7;*/
+        }
+      }
+    </style>
+    <table>
+      <input
+        type="hidden"
+        name="checklist[sessionEmail]"
+        value="<%=sessionLogin %>"
+      />
+      <input type="hidden" id="TotalQuestions" value="<%=totalQn%>" />
+      <tr>
+        <th>3. Food Hygiene (35%)</th>
+        <th>Point(s) Awarded</th>
+      </tr>
+      <tr>
+        <td class = "greenTr">Storage & Preparation of Food</td>
+        <td class = "greenTr"></td>
+      </tr>
+
+      <% for(var i=0; i<SectionThreeFBStoragePrep.length; i++) { %>
+        <tr>
+          <td>
+            <pre class="trans-pre"><%=SectionThreeFBStoragePrep[i]%></pre>
+          </td>
+          <td>
+            <select 
+              class="questions3"
+              onchange="getPoints()">
+              <option value="1">1</option>
+              <option value="0">0</option>
+              <option value="N/A">N/A</option>
+            </select>
+          </td>
+        </tr>
+        <% } %>
+
+      <tr>
+        <td class = "greenTr">Storage of Food in Refrigerator or Warmer</td>
+        <td class = "greenTr"></td>
+      </tr>
+
+      <% for(var i=0; i<SectionThreeFBStorageFridgeOrWarmer.length; i++) { %>
+        <tr>
+          <td>
+            <pre class="trans-pre"><%=SectionThreeFBStorageFridgeOrWarmer[i]%></pre>
+          </td>
+          <td>
+            <select 
+              class="questions3"
+              onchange="getPoints()">
+              <option value="1">1</option>
+              <option value="0">0</option>
+              <option value="N/A">N/A</option>
+            </select>
+          </td>
+        </tr>
+      <% } %>
+      <tr>
+        <td class = "greyTr">Score:</td>
+        <td>
+          <input
+            name="checklist[SectionThreeTotal]"
+            id="total3"
+            value="12"
+            min="10"
+            max="1"
+            readonly
+          />
+        </td>
+        <script>
+          function getFinalScore()
+          {
+            var list1 = document.getElementsByClassName("questions3");
+            document.getElementById("total3").value = list1.length;
+          }
+          window.onload = getFinalScore();
+        </script>
+      </tr>
+    </table>
+    <h2>Remarks</h2>
+    <textarea
+    name="checklist[SectionThreeRemarks]"
+    id="checklistRemarkSectionThree"
+    type="text"
+    placeholder="Type Here"
+    class="remarksTextBox"
+    rows="5"
+    cols="30"
+  ></textarea>
+  <br> <br>
+<h3>Photo</h3>
+
+    <input type="file"  onchange="previewFile()" id="photo" />
+    <img id="image" height="50%"  style="max-height:350pt "  max-width="670pt"width="50%" />
+    <input type="hidden" id="SectionThreeImage" name="checklist[SectionThreeImage]">
+  <br><br>
+  <button id ="Addbutton" type="button" class="btn btn-default btn-sm"  style="display:none" onclick="AddPhoto2()">
+    <span class="glyphicon glyphicon-plus-sign"></span> Add Photo
+  </button>
+  <br>
+  <input type="file" onchange="previewFile2()" id="photo2"  style="display:none"/>
+  <img
+    id="image2"
+    height="50%"
+    style="max-height: 350pt"
+    max-width="670pt"
+    width="50%"
+  />
+  <input
+    type="hidden"
+    id="SectionThreeImage2"
+    name="checklist[SectionThreeImage2]"
+  />
+  <br /><br />
+  <input
+  type="button"
+  class="ui violet big basic button"
+  value="Previous Section"
+  onclick="location.href='/F&B-ChecklistSectionTwo';"
+/>
+    <input
+      class="ui violet big basic button"
+      type="submit"
+      value="Next Section"
+    />
+  </form>
+  <script type="text/javascript">
+   var firebaseConfig = {
+      apiKey: "AIzaSyDNwNQbCspC6Wzjgu9eb9nQAp2Le2MIVJk",
+      authDomain: "auditchecklist-fc4ff.firebaseapp.com",
+      databaseURL: "https://auditchecklist-fc4ff.firebaseio.com",
+      projectId: "auditchecklist-fc4ff",
+      storageBucket: "auditchecklist-fc4ff.appspot.com",
+      messagingSenderId: "559220723165",
+      appId: "1:559220723165:web:b3b9d01676fc415538fa34",
+      measurementId: "G-2C7Z3FHH89",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var image64;
+    function previewFile() {
+  
+    const file = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+      image64 = reader.result;
+      localStorage.setItem("FBSectionThreeImage", image64);
+      document.getElementById("SectionThreeImage").value = image64;
+      document.getElementById("image").src = image64;
+    const byteSize = str => new Blob([str]).size;
+
+  if ((byteSize(image64) >200000)){
+    alert("Photo is too large. Please select another photo.")
+    document.getElementById("image").src=""
+    document.getElementById("Addbutton").style="display:none"
+  }else{
+    const byteSize = str => new Blob([str]).size;
+      console.log(byteSize(image64))
+      document.getElementById("SectionThreeImage").value=image64
+      console.log(image64)
+      document.getElementById("Addbutton").style="display:block"
+  }
+
+  
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+  
+}
+function previewFile2() {
+      const file = document.querySelector("#photo2").files[0];
+      const reader = new FileReader();
+      reader.addEventListener(
+        "load",
+        function () {
+          
+          image264 = reader.result;
+          localStorage.setItem("FBSectionThreeImage2", image264);
+          document.getElementById("SectionThreeImage2").value = image264;
+          document.getElementById("image2").src = image264;
+       
+          const byteSize = (str) => new Blob([str]).size;
+
+          if (byteSize(image264) > 200000) {
+            alert("Photo is too large. Please select another photo.");
+            document.getElementById("image2").src = "";
+            document.getElementById("Addbutton").style="display:none"
+
+          } else {
+            const byteSize = (str) => new Blob([str]).size;
+            console.log(byteSize(image264));
+            document.getElementById("SectionThreeImage2").value = image264;
+            console.log(image264);
+            document.getElementById("Addbutton").style="display:none"
+          }
+        },
+        false
+      );
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+    function AddPhoto2(){
+     document.getElementById("photo2").style="display:block"
+
+    }
+    function getPoints() {
+      var arr3 = document.getElementsByClassName("questions3");
+      var tot3 = 0;
+      for (var i = 0; i < arr3.length; i++) {
+        var data = arr3[i].value;
+        if (data == 1) {
+          tot3++;
+        } else if (data == 0) {
+          tot3 = tot3;
+        } else {
+          //totalQn -= 1;
+        }
+      }
+      document.getElementById("total3").value = tot3;
+      //console.log("XSRFTOKEN is :" + Cookies.get("XSRF-TOKEN"));
+    }
+  </script>
+
+  <script>
+    window.onload = function LoadData()
+    {
+
+      if(localStorage.getItem("FBSectionThreeImage") != null)
+      {
+        var image64;
+        image64 = localStorage.getItem("FBSectionThreeImage");
+        document.getElementById("SectionThreeImage").value = image64;
+        //console.log("Getting image64 value: " + image64);
+        document.getElementById("image").src = image64;
+      }
+      if(localStorage.getItem("FBSectionThreeImage2") != null)
+      {
+        var image64;
+        image64 = localStorage.getItem("FBSectionThreeImage2");
+        document.getElementById("SectionThreeImage2").value = image64;
+        //console.log("Getting image64 value: " + image64);
+        document.getElementById("image2").src = image64;
+      }
+    var importedData = <%- JSON.stringify(convCheckListData)%>;
+    let count = 0;
+    for(let key in importedData)
+    {
+      count++;
+    }
+    if(count != 0)
+    {
+      updateCheckList(importedData);
+    }
+
+    function selectElement(id, valueToChange) {
+      //console.log("Change ID: " + id + "Change data: " + valueToChange);
+      let element = document.getElementById(id);
+      element.value = valueToChange;
+    }
+    function updateCheckList(checklist) {
+      document.getElementById("image").src = checklist["SectionThreeImage"];
+      selectElement("total3", checklist["SectionThreeTotal"]);
+      //Loop question here
+      var list1 = document.getElementsByClassName("questions3");
+      var total = parseInt(document.getElementById("TotalQuestions").value);
+      for(var i = 0; i < list1.length; i++)
+      {
+        var strI = (i+1+total).toString();
+        selectElement(strI, checklist[strI]);
+      }
+      if(checklist["SectionThreeRemarks"] != undefined)
+      {
+        selectElement("checklistRemarkSectionThree", checklist["SectionThreeRemarks"])
+      }
+    }
+  }
+  </script>
+
+  <script>
+    var total = parseInt(document.getElementById("TotalQuestions").value);
+    var list1 = document.getElementsByClassName("questions3");
+    for (var i = 0; i < list1.length; i++) {
+      list1[i].name = "checklist[" + (i + 1 + total) + "]";
+      list1[i].id = i + 1 + total;
+    }
+  </script>
+</div>
+<%- include("./partials/footer") %>

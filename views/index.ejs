@@ -1,0 +1,198 @@
+<%- include("partials/header") %>
+
+<div class="ui main text container">
+  <div class="ui huge header">Audit Checklist</div>
+  <h2>The Audit Checklist Test</h2>
+  <form class="ui form" action="/checklist" method="post">
+    <table>
+      <tr>
+        <th>1. Professionalism & Staff Hygiene (20%)</th>
+        <th>Point(s) Awarded</th>
+      </tr>
+      <tr>
+        <td>Professionalism</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          Shop is open and ready to service patients/visitors according to
+          operating hours
+        </td>
+        <td>
+          <input
+            onblur="findTotal()"
+            class="questions"
+            type="number"
+            name="checklist[Q1]"
+            value="0"
+            min="0"
+            max="2"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Staff Attendance: adequate staff for peak and non-peak hours.</td>
+        <td>
+          <input
+            onblur="findTotal()"
+            class="questions"
+            type="number"
+            name="checklist[Q2]"
+            value="0"
+            min="0"
+            max="5"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>At least one (1) clearly assigned person in-charge on site.</td>
+        <td>
+          <input
+            onblur="findTotal()"
+            class="questions"
+            type="number"
+            name="checklist[Q3]"
+            value="0"
+            min="0"
+            max="5"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><input type="file" id="photo" /></td>
+      </tr>
+      <tr>
+        <td>Staff Hygiene</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Staff uniform/attire is not soiled.</td>
+        <td>
+          <input
+            onblur="findTotal()"
+            class="questions"
+            type="number"
+            name="checklist[Q4]"
+            value="0"
+            min="0"
+            max="5"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Staff who are unfit for work due to illness should not report to
+          work).
+        </td>
+        <td>
+          <input
+            onblur="findTotal()"
+            class="questions"
+            type="number"
+            name="checklist[Q5]"
+            value="0"
+            min="0"
+            max="5"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Staff who are fit for work but suffering from the lingering effects of
+          a cough and/or cold should cover their mouths with a surgical mask.
+        </td>
+        <td>
+          <input
+            onblur="findTotal()"
+            class="questions"
+            type="number"
+            name="checklist[Q6]"
+            value="0"
+            min="0"
+            max="5"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><input type="file" id="photo" /></td>
+      </tr>
+      <tr>
+        <td>Score:</td>
+        <td>
+          <input
+            name="checklist[Total]"
+            id="total"
+            value="0"
+            min="10"
+            max="5"
+          />
+        </td>
+      </tr>
+    </table>
+    <input class="ui violet big basic button" type="submit" onclick="uploadImage()"/>
+  </form>
+
+    <script type="text/javascript">
+        function findTotal() {
+          var arr = document.getElementsByClassName("questions");
+          var tot = 0;
+          for (var i = 0; i < arr.length; i++) {
+            if (parseInt(arr[i].value)) tot += parseInt(arr[i].value);
+          }
+          document.getElementById("total").value = tot;
+        }
+    </script>
+    <script>
+        function uploadImage() {
+          const ref = firebase.storage().ref();
+
+          const file = document.querySelector("#photo").files[0];
+
+          const name = new Date() + "-" + file.name;
+
+          const metadata = {
+            contentType: file.type,
+          };
+
+          const task = ref.child(name).put(file, metadata);
+
+          task
+            .then((snapshot) => snapshot.ref.getDownloadURL())
+            .then((url) => {
+              alert("Image Upload Successfully");
+            });
+        }
+    </script>
+    
+    </div>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyAvyviXfLocEy68ofmLkZ9R96uMbHhFqUY",
+      authDomain: "hackerman-3a334.firebaseapp.com",
+      databaseURL: "https://hackerman-3a334.firebaseio.com",
+      projectId: "hackerman-3a334",
+      storageBucket: "hackerman-3a334.appspot.com",
+      messagingSenderId: "640418182894",
+      appId: "1:640418182894:web:8f424e545b38efc001a5ff",
+      measurementId: "G-XSYDG6MY5Z",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+  <%- include("partials/footer") %>
+</div>

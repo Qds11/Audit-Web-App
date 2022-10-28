@@ -1,0 +1,27 @@
+{
+  "name": "auditchecklist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tan Guang Wei",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-sanitizer": "^1.0.5",
+    "firebase": "^8.0.1",
+    "firebase-admin": "^9.4.1",
+    "html2canvas": "^1.0.0-rc.7",
+    "jspdf": "^2.3.0",
+    "method-override": "^3.0.0",
+    "node-localstorage": "^2.1.6",
+    "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.6"
+  }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase Server Auth</title>
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <body >
+    <main class="container-fluid">
+      
+        <img src="Images/singhealthLogo_login.png" alt="logo" />
+        <form id="resetpass" class="container-fluid">
+          <h2>Forget Password</h2>
+          <p>Please enter your email address and we will send you an email with instructions to reset your password.</p>
+          <div class="form-group">
+          <label class="text-danger ml-1">Email</label>
+          <div class="input-group">   
+            <span class="input-group-addon"><i class=
+              "glyphicon glyphicon-user"></i></span>
+          <input type="text" name="login" onblur="checkUserEmail()"  id="email" class="form-control" placeholder="mail@mail.com"/>
+          
+        </div>
+        <span class="help-block"  id="userEmailError" >Please check your email address.</span>
+        <button id="resetButton"class="btn btn-warning btn-block" >Reset Password</button>
+          
+          <p>Go back to login page: <a href="login">
+            <strong>Login Page</strong></a></p>   
+          
+          
+        </form>
+     
+
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+      <script>
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyDNwNQbCspC6Wzjgu9eb9nQAp2Le2MIVJk",
+          authDomain: "auditchecklist-fc4ff.firebaseapp.com",
+          databaseURL: "https://auditchecklist-fc4ff.firebaseio.com",
+          projectId: "auditchecklist-fc4ff",
+          storageBucket: "auditchecklist-fc4ff.appspot.com",
+          messagingSenderId: "559220723165",
+          appId: "1:559220723165:web:b3b9d01676fc415538fa34",
+          measurementId: "G-2C7Z3FHH89",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+        
+function checkUserEmail(){
+    //gets user input
+    var email = document.getElementById("email");
+    //correct email format
+    var userEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var flag;
+    if(email.value.match(userEmailFormate)){
+        flag = false;
+    }else{
+        flag = true;
+    }
+    //if input email doesn't match the correct email format, text to prompt user to input an email with a correct format is displayed 
+    if(flag){
+        console.log("wrong email format")
+        document.getElementById("userEmailError").style.display = "block";
+        document.getElementById('email').style.borderColor = "red";
+    }else{//if input email matches the correct email format, text to prompt user is not displayed
+        console.log("correct email format")
+        document.getElementById("userEmailError").style.display = "none";
+        document.getElementById('email').style.borderColor = "lightgray";
+    }
+}
+      
+document
+            .getElementById("resetpass")
+            .addEventListener("submit", (event) => {
+              event.preventDefault();
+              const email= event.target.login.value;
+              console.log(email)
+              console.log("button press")
+              //var password= document.getElementById("password").value;
+        
+           // var password = event.target.password.value;
+          
+          var userEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       
+          var checkUserEmailValid = email.match(userEmailFormate);
+         
+      if(checkUserEmailValid ==null){   
+            //return checkUserPassword();
+            alert("Error. Please check your email.")
+            console.log("wrong email format");
+          }
+        
+          else {
+            console.log("firrebaseauth");
+              firebase
+                .auth()
+                .sendPasswordResetEmail(email)
+                .then(function(){
+                    alert("Email has been sent. Please check and verify.")
+                })
+                .catch(function(error){
+                    alert("Error")
+                });
+            } 
+            });
+      </script>
+    </main>
+  </body>
+</html>

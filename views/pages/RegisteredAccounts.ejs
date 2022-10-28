@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html class="">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/history.css" type="text/css" />
+    <style>
+      .navbar-default {
+       float: right;
+       margin-right: 30px;
+       margin-top: 20px;
+       background-color: #ffffff;
+       border-color: #ffffff;
+       color: rgb(0, 0, 0);
+       font-size: 120%;
+       }  
+      .panel-heading .colpsible-panel:after {
+        font-family: "Glyphicons Halflings";
+        content: "\e114";
+        float: right;
+        color: rgba(255, 155, 0, 1);
+      }
+      .panel-heading .colpsible-panel.collapsed:after {
+        content: "\e080";
+      }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registered Accounts</title>
+  </head>
+  <body>
+    <div class="row">
+      <div class="header">
+        <div class="logo">
+          <div class="col-sm-4">
+            <a href="/landingPage"
+              ><img src="Images/logo.png" alt="SingHealth Logo"
+            /></a>
+            <!--<li>please add a link for this picture to return to landing page</li>-->
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+              <li><a href="/landingPage">Home</a></li>
+              <!--<li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Create New Checklist
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                  <li><a href="/F&B-ChecklistSectionOne">F&B Checklist</a></li>
+                  <li><a href="/Non-F&B-ChecklistSectionOne">Non-F&B Checklist</a></li>
+                </ul>
+              </li>-->
+              <li class="active"><a href="/RegisteredAccounts">Registered accounts</a></li>
+              <li><a href="/EditChecklistQuestions">Edit Checklist Questions</a></li>
+              <li><a href="/F&B-History">History</a></li>
+              <li><a href="/sessionLogout">Sign out</a></li>
+             
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="border1"></div>
+
+    <div class="container">
+      <div class="panel-group" id="accordion">
+        <div class="panel-success class">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a
+                class="colpsible-panel"
+                data-toggle="collapse"
+                data-parent="#accordion"
+                href="#collapseOne"
+              >
+                Registered Accounts
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Delete Account (Deleting account will delete its database)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i=0; i<registeredEmails.length; i++) { %>
+                    <tr>
+                    <th>
+                        <%= registeredEmails[i] %>
+                    </th>
+                    <th>
+                      <button onclick="window.location = '/DeleteUser/<%= registeredEmails[i] %>'">Delete</button>
+                    </th>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              <button id="RegisterButton" class="float-left submit-button">
+                Register New Account
+              </button>
+              <button id="ResetPasswordButton" class="float-right submit-button">
+                Reset Account Password
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end container -->
+    <script type="text/javascript">
+      document.getElementById("RegisterButton").onclick = function () {
+        location.href = "/signup";
+      };
+    </script>
+    <script type="text/javascript">
+      document.getElementById("ResetPasswordButton").onclick = function () {
+        location.href = "/resetpassword";
+      };
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+
+<html class="">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/editQuestion.css" type="text/css" />
+    <style>
+      .panel-heading .colpsible-panel:after {
+        font-family: "Glyphicons Halflings";
+        content: "\e114";
+        float: right;
+        color: rgba(255, 155, 0, 0.7);
+      }
+      .panel-heading .colpsible-panel.collapsed:after {
+        content: "\e080";
+      }
+
+      @media only screen and (max-width: 780px) {
+        table, td, tr {
+          width: 100%;
+          font-size: 13px;
+        }
+        .logo img{
+        margin:auto;
+        padding-top: 25px;
+        padding-left: 15px;
+        width: 160px;
+        height: 160px;
+        margin-left: 7%;
+        float: left;
+        }
+        .border1{
+          background-color: rgba(255, 166, 0, 0.678);
+          /*background-color: white;*/
+          width: 106%;
+          height: 10px;
+        }
+        .navbar-default {
+        float: right;
+        margin: auto;
+        margin-right: 10%;
+        margin-top: 00%;
+        background-color: #ffffff;
+        border-color: #ffffff;
+        color: rgb(0, 0, 0);
+        font-size: 90%;
+        }
+      }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit CheckList Questions</title>
+
+  </head>
+  <body>
+    <div class="row">
+      <div class="header">
+          <div class="logo">
+            <div class="col-sm-4">
+              <a href="/landingPage"><img src="Images/logo.png" alt="SingHealth Logo"></a>
+              <!--<li>please add a link for this picture to return to landing page</li>-->
+              </div>
+            </div>
+            <div class="col-sm-8">
+          <nav class="navbar navbar-default">
+          
+             
+              <ul class="nav navbar-nav">
+                <li><a href="/landingPage">Home</a></li>
+      
+                <li><a href="/RegisteredAccounts">Registered accounts</a></li>
+                <li class="active"><a href="/EditChecklistQuestions">Edit Checklist Questions</a></li>
+                <li><a href="/F&B-History">History</a></li>
+                <li><a href="/sessionLogout">Sign out</a></li>
+               
+              </ul>
+         
+          </nav>
+        </div>
+      </div>
+    </div>
+      <div class="border1"></div>
+
+    <div id="non-f&b-questions">
+      <h1>Non-F&B Questions</h1>
+      <form 
+      class="ui form"
+      action="/UpdateQuestions"
+      method="POST">
+        <table id="Non-F&B-QuestionsTable">
+          <thead>
+            <tr>
+              <th>Questions</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1. Professionalism & Staff Hygiene</th>
+            </tr>
+            <a id = "NFBProfessionalism">
+            <tr>
+              <th>Professionalism</th>
+            </tr>
+            <% for(var i=0; i<SectionOneNonFBProfessionalism.length; i++) { %>
+            <tr>
+              <th>
+                <textarea
+                  type="text"
+                  class="NFBProfessionalismSectionOneQn"
+                  placeholder="Enter question here"
+                  cols = "60"
+                  rows = "5"
+                  onkeyup="saveValue(this);"
+                ><%=SectionOneNonFBProfessionalism[i]%></textarea>
+                <% if(i == SectionOneNonFBProfessionalism.length-1) { %>
+                <button type="button" id ="RemoveNFBProfessionalismQnSectionOne">Remove</button>
+                <% } %>
+                <% if(SectionOneNonFBProfessionalism.length <= 1) { %>
+                  <script type = "text/javascript">
+                    window.onload = document.getElementById("RemoveNFBProfessionalismQnSectionOne").style.visibility = "hidden";
+                  </script>
+                <% } %>
+              </th>
+            </tr>
+            <% } %>
+            <tr>
+              <th>
+                <button id="AddNFBProfessionalismQnSectionOne" class="float-right submit-button" >Add Question</button>
+              </th>
+            </tr>
+          </a>
+          <a id = "NFBStaff Hygiene">
+            <tr>
+              <th>Staff Hygiene</th>
+            </tr>
+            <% for(var i=0; i<SectionOneNonFBStaffHygiene.length; i++) { %>
+            <tr>
+              <th>
+                <textarea
+                  type="text"
+                  class="NFBStaffHygieneSectionOneQn"
+                  placeholder="Enter question here"
+                  cols = "60"
+                  rows = "5"
+                  onkeyup="saveValue(this);"
+                ><%=SectionOneNonFBStaffHygiene[i]%></textarea>
+                <% if(i == SectionOneNonFBStaffHygiene.length-1) { %>
+                <button type="button" id ="RemoveNFBStaffHygieneQnSectionOne">Remove</button>
+                <% } %>
+                <% if(SectionOneNonFBStaffHygiene.length <= 1) { %>
+                  <script type = "text/javascript">
+                    window.onload = document.getElementById("RemoveNFBStaffHygieneQnSectionOne").style.visibility = "hidden";
+                  </script>
+                <% } %>
+              </th>
+            </tr>
+            <% } %>
+            <tr>
+              <th>
+                <button id="AddNFBStaffHygieneQnSectionOne" class="float-right submit-button" >Add Question</button>
+              </th>
+            </tr>
+          </a>
+            <tr>
+              <th>2. Housekeeping & General Cleanliness</th>
+            </tr>
+            <a id = "NFBGeneral Environment Cleanliness">
+            <tr>
+              <th>General Environment Cleanliness</th>
+            </tr>
+            <% for(var i=0; i<SectionTwoNonFBGEC.length; i++) { %>
+              <tr>
+                <th>
+                  <textarea
+                  type="text"
+                  class="NFBGECSectionTwoQn"
+                  placeholder="Enter question here"
+                  cols = "60"
+                  rows = "5"
+                  onkeyup="saveValue(this);"
+                ><%=SectionTwoNonFBGEC[i]%></textarea>
+                  <% if(i == SectionTwoNonFBGEC.length-1) { %>
+                    <button type="button" id ="RemoveNFBGECQnSectionTwo">Remove</button>
+                  <% } %>
+                  <% if(SectionTwoNonFBGEC.length <= 1) { %>
+                    <script type = "text/javascript">
+                      window.onload = document.getElementById("RemoveNFBGECQnSectionTwo").style.visibility = "hidden";
+                    </script>
+                  <% } %>
+                </th>
+              </tr>
+              <% } %>
+              <tr>
+                <th>
+                  <button id="AddNFBGECQnSectionTwo" class="float-right submit-button" >Add Question</button>
+                </th>
+              </tr>
+            </a>
+
+            <tr>
+              <th>3. Workplace Safety & Health</th>
+            </tr>
+            <a id = "NFBGeneral Safety">
+            <tr>
+              <th>General Safety</th>
+            </tr>
+            <% for(var i=0; i<SectionThreeNonFBGeneralSafety.length; i++) { %>
+              <tr>
+                <th>
+                  <textarea
+                  type="text"
+                  class="NFBGeneralSafetySectionThreeQn"
+                  placeholder="Enter question here"
+                  cols = "60"
+                  rows = "5"
+                  onkeyup="saveValue(this);"
+                ><%=SectionThreeNonFBGeneralSafety[i]%></textarea>
+                  <% if(i == SectionThreeNonFBGeneralSafety.length-1) { %>
+                    <button type="button" id ="RemoveNFBGeneralSafetyQnSectionThree">Remove</button>
+                  <% } %>
+                  <% if(SectionThreeNonFBGeneralSafety.length <= 1) { %>
+                    <script type = "text/javascript">
+                      window.onload = document.getElementById("RemoveNFBGeneralSafetyQnSectionThree").style.visibility = "hidden";
+                    </script>
+                  <% } %>
+                </th>
+              </tr>
+              <% } %>
+              <tr>
+                <th>
+                  <button id="AddNFBGeneralSafetyQnSectionThree" class="float-right submit-button" >Add Question</button>
+                </th>
+              </tr>
+            </a>
+
+            <a id = "NFBFire & Emergency Safety">
+              <tr>
+                <th>Fire & Emergency Safety</th>
+              </tr>
+              <% for(var i=0; i<SectionThreeNonFBFireEmergencySafety.length; i++) { %>
+                <tr>
+                  <th>
+                    <textarea
+                      type="text"
+                      class="NFBFireEmergencySafetySectionThreeQn"
+                      placeholder="Enter question here"
+                      cols = "60"
+                      rows = "5"
+                      onkeyup="saveValue(this);"
+                  ><%=SectionThreeNonFBFireEmergencySafety[i]%></textarea>
+                    <% if(i == SectionThreeNonFBFireEmergencySafety.length-1) { %>
+                      <button type="button" id ="RemoveNFBFireEmergencySafetyQnSectionThree">Remove</button>
+                    <% } %>
+                    <% if(SectionThreeNonFBFireEmergencySafety.length <= 1) { %>
+                      <script type = "text/javascript">
+                        window.onload = document.getElementById("RemoveNFBFireEmergencySafetyQnSectionThree").style.visibility = "hidden";
+                      </script>
+                    <% } %>
+                  </th>
+                </tr>
+                <% } %>
+                <tr>
+                  <th>
+                    <button id="AddNFBFireEmergencySafetyQnSectionThree" class="float-right submit-button" >Add Question</button>
+                  </th>
+                </tr>
+              </a>
+              <a id = "NFBElectrical Safety">
+                <tr>
+                  <th>Electrical Safety</th>
+                </tr>
+                <% for(var i=0; i<SectionThreeNonFBElectricalSafety.length; i++) { %>
+                  <tr>
+                    <th>
+                      <textarea
+                        type="text"
+                        class="NFBElectricalSafetySectionThreeQn"
+                        placeholder="Enter question here"
+                        cols = "60"
+                        rows = "5"
+                        onkeyup="saveValue(this);"
+                      ><%=SectionThreeNonFBElectricalSafety[i]%></textarea>
+                      <% if(i == SectionThreeNonFBElectricalSafety.length-1) { %>
+                        <button type="button" id ="RemoveNFBElectricalSafetyQnSectionThree">Remove</button>
+                      <% } %>
+                      <% if(SectionThreeNonFBElectricalSafety.length <= 1) { %>
+                        <script type = "text/javascript">
+                          window.onload = document.getElementById("RemoveNFBElectricalSafetyQnSectionThree").style.visibility = "hidden";
+                        </script>
+                      <% } %>
+                    </th>
+                  </tr>
+                  <% } %>
+                  <tr>
+                    <th>
+                      <button id="AddNFBElectricalSafetyQnSectionThree" class="float-right submit-button" >Add Question</button>
+                    </th>
+                  </tr>
+                </a>
+          </tbody>
+        </table>
+    </div>
+
+    <div id="f&b-questions">
+      <h1>F&B Questions</h1>
+        <table id="F&B-QuestionsTable">
+          <thead>
+            <tr>
+              <th>Questions</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1. Professionalism & Staff Hygiene</th>
+            </tr>
+          <a id = "FBProfessionalism">
+            <tr>
+              <th>Professionalism</th>
+            </tr>
+            <% for(var i=0; i<SectionOneFBProfessionalism.length; i++) { %>
+            <tr>
+              <th>
+                <textarea
+                  type="text"
+                  class="FBProfessionalismSectionOneQn"
+                  placeholder="Enter question here"
+                  cols = "60"
+                  rows = "5"
+                  onkeyup="saveValue(this);"
+                ><%=SectionOneFBProfessionalism[i]%></textarea>
+                <% if(i == SectionOneFBProfessionalism.length-1) { %>
+                <button type="button" id ="RemoveProfessionalismFBQnSectionOne">Remove</button>
+                <% } %>
+                <% if(SectionOneFBProfessionalism.length <= 1) { %>
+                  <script type = "text/javascript">
+                    window.onload = document.getElementById("RemoveProfessionalismFBQnSectionOne").style.visibility = "hidden";
+                  </script>
+                <% } %>
+              </th>
+            </tr>
+            <% } %>
+            <tr>
+              <th>
+                <button id="AddProfessionalismFBQnSectionOne" class="float-right submit-button" >Add Question</button>
+              </th>
+            </tr>
+          </a>
+          <a id = "FBStaff Hygiene">
+            <tr>
+              <th>Staff Hygiene</th>
+            </tr>
+            <% for(var i=0; i<SectionOneFBStaffHygiene.length; i++) { %>
+            <tr>
+              <th>
+                <textarea
+                  type="text"
+                  class="FBStaffHygieneSectionOneQn"
+                  placeholder="Enter question here"
+                  cols = "60"
+                  rows = "5"
+                  onkeyup="saveValue(this);"
+                ><%=SectionOneFBStaffHygiene[i]%></textarea>
+                <% if(i == SectionOneFBStaffHygiene.length-1) { %>
+                <button type="button" id ="RemoveStaffHygieneFBQnSectionOne">Remove</button>
+                <% } %>
+                <% if(SectionOneFBStaffHygiene.length <= 1) { %>
+                  <script type = "text/javascript">
+                    window.onload = document.getElementById("RemoveStaffHygieneFBQnSectionOne").style.visibility = "hidden";
+                  </script>
+                <% } %>
+              </th>
+            </tr>
+            <% } %>
+            <tr>
+              <th>
+                <button id="AddStaffHygieneFBQnSectionOne" class="float-right submit-button" >Add Question</button>
+              </th>
+            </tr>
+          </a>
+            <tr>
+              <th>2. Housekeeping & General Cleanliness</th>
+            </tr>
+          <a id = "FBGeneral Environment Cleanliness">
+            <tr>
+              <th>General Environment Cleanliness</th>
+            </tr>
+            <% for(var i=0; i<SectionTwoFBGEC.length; i++) { %>
+              <tr>
+                <th>
+                  <textarea
+                    type="text"
+                    class="FBGECSectionTwoQn"
+                    placeholder="Enter question here"
+                    cols = "60"
+                    rows = "5"
+                    onkeyup="saveValue(this);"
+                ><%=SectionTwoFBGEC[i]%></textarea>
+                  <% if(i == SectionTwoFBGEC.length-1) { %>
+                    <button type="button" id ="RemoveGECFBQnSectionTwo">Remove</button>
+                  <% } %>
+                  <% if(SectionTwoFBGEC.length <= 1) { %>
+                    <script type = "text/javascript">
+                      window.onload = document.getElementById("RemoveGECFBQnSectionTwo").style.visibility = "hidden";
+                    </script>
+                  <% } %>
+                </th>
+              </tr>
+              <% } %>
+              <tr>
+                <th>
+                  <button id="AddGECFBQnSectionTwo" class="float-right submit-button" >Add Question</button>
+                </th>
+              </tr>
+            </a>
+          <a id = "FBHand Hygiene Facilities">
+              <tr>
+                <th>Hand Hygiene Facilities</th>
+              </tr>
+              <% for(var i=0; i<SectionTwoFBHHF.length; i++) { %>
+                <tr>
+                  <th>
+                    <textarea
+                      type="text"
+                      class="FBHHFSectionTwoQn"
+                      placeholder="Enter question here"
+                      cols = "60"
+                      rows = "5"
+                      onkeyup="saveValue(this);"
+                    ><%=SectionTwoFBHHF[i]%></textarea>
+                    <% if(i == SectionTwoFBHHF.length-1) { %>
+                      <button type="button" id ="RemoveHHFFBQnSectionTwo">Remove</button>
+                    <% } %>
+                    <% if(SectionTwoFBHHF.length <= 1) { %>
+                      <script type = "text/javascript">
+                        window.onload = document.getElementById("RemoveHHFFBQnSectionTwo").style.visibility = "hidden";
+                      </script>
+                    <% } %>
+                  </th>
+                </tr>
+                <% } %>
+                <tr>
+                  <th>
+                    <button id="AddHHFFBQnSectionTwo" class="float-right submit-button" >Add Question</button>
+                  </th>
+                </tr>
+              </a>
+            <tr>
+              <th>3. Food Hygiene</th>
+            </tr>
+          <a id = "FBStorage & Preparation of Food">
+            <tr>
+              <th>Storage & Preparation of Food</th>
+            </tr>
+            <% for(var i=0; i<SectionThreeFBStoragePrep.length; i++) { %>
+              <tr>
+                <th>
+                  <textarea
+                      type="text"
+                      class="FBStoragePrepSectionThreeQn"
+                      placeholder="Enter question here"
+                      cols = "60"
+                      rows = "5"
+                      onkeyup="saveValue(this);"
+                    ><%=SectionThreeFBStoragePrep[i]%></textarea>
+                  <% if(i == SectionThreeFBStoragePrep.length-1) { %>
+                    <button type="button" id ="RemoveStoragePrepFBQnSectionThree">Remove</button>
+                  <% } %>
+                  <% if(SectionThreeFBStoragePrep.length <= 1) { %>
+                    <script type = "text/javascript">
+                      window.onload = document.getElementById("RemoveStoragePrepFBQnSectionThree").style.visibility = "hidden";
+                    </script>
+                  <% } %>
+                </th>
+              </tr>
+              <% } %>
+              <tr>
+                <th>
+                  <button id="AddStoragePrepFBQnSectionThree" class="float-right submit-button" >Add Question</button>
+                </th>
+              </tr>
+            </a>
+            <a id = "Storage of Food in Refrigerator or Warmer">
+              <tr>
+                <th>Storage of Food in Refrigerator or Warmer</th>
+              </tr>
+              <% for(var i=0; i<SectionThreeFBStorageFridgeOrWarmer.length; i++) { %>
+                <tr>
+                  <th>
+                    <textarea
+                      type="text"
+                      class="FBStorageFridgeOrWarmerSectionThreeQn"
+                      placeholder="Enter question here"
+                      cols = "60"
+                      rows = "5"
+                      onkeyup="saveValue(this);"
+                    ><%=SectionThreeFBStorageFridgeOrWarmer[i]%></textarea>
+                    <% if(i == SectionThreeFBStorageFridgeOrWarmer.length-1) { %>
+                      <button type="button" id ="RemoveStorageFridgeOrWarmerFBQnSectionThree">Remove</button>
+                    <% } %>
+                    <% if(SectionThreeFBStorageFridgeOrWarmer.length <= 1) { %>
+                      <script type = "text/javascript">
+                        window.onload = document.getElementById("RemoveStorageFridgeOrWarmerFBQnSectionThree").style.visibility = "hidden";
+                      </script>
+                    <% } %>
+                  </th>
+                </tr>
+                <% } %>
+                <tr>
+                  <th>
+                    <button id="AddStorageFridgeOrWarmerFBQnSectionThree" class="float-right submit-button" >Add Question</button>
+                  </th>
+                </tr>
+            </a>
+              <tr>
+                <th>4. Healthier Choice in line with HPB’s Healthy Eating’s Initiative</th>
+              </tr>
+            <a id = "FBFood">
+              <tr>
+                <th>Food</th>
+              </tr>
+              <% for(var i=0; i<SectionFourFBFood.length; i++) { %>
+                <tr>
+                  <th>
+                    <textarea
+                      type="text"
+                      class="FBFoodSectionFourQn"
+                      placeholder="Enter question here"
+                      cols = "60"
+                      rows = "5"
+                      onkeyup="saveValue(this);"
+                    ><%=SectionFourFBFood[i]%></textarea>
+                    <% if(i == SectionFourFBFood.length-1) { %>
+                      <button type="button" id ="RemoveFoodFBQnSectionFour">Remove</button>
+                    <% } %>
+                    <% if(SectionFourFBFood.length <= 1) { %>
+                      <script type = "text/javascript">
+                        window.onload = document.getElementById("RemoveFoodFBQnSectionFour").style.visibility = "hidden";
+                      </script>
+                    <% } %>
+                  </th>
+                </tr>
+                <% } %>
+                <tr>
+                  <th>
+                    <button id="AddFoodFBQnSectionFour" class="float-right submit-button" >Add Question</button>
+                  </th>
+                </tr>
+              </a>
+              <a id = "FBBeverage">
+                <tr>
+                  <th>Beverage</th>
+                </tr>
+                <% for(var i=0; i<SectionFourFBBeverage.length; i++) { %>
+                  <tr>
+                    <th>
+                      <textarea
+                        type="text"
+                        class="FBBeverageSectionFourQn"
+                        placeholder="Enter question here"
+                        cols = "60"
+                        rows = "5"
+                        onkeyup="saveValue(this);"
+                    ><%=SectionFourFBBeverage[i]%></textarea>
+                      <% if(i == SectionFourFBBeverage.length-1) { %>
+                        <button type="button" id ="RemoveBeverageFBQnSectionFour">Remove</button>
+                      <% } %>
+                      <% if(SectionFourFBBeverage.length <= 1) { %>
+                        <script type = "text/javascript">
+                          window.onload = document.getElementById("RemoveBeverageFBQnSectionFour").style.visibility = "hidden";
+                        </script>
+                      <% } %>
+                    </th>
+                  </tr>
+                  <% } %>
+                  <tr>
+                    <th>
+                      <button id="AddBeverageFBQnSectionFour" class="float-right submit-button" >Add Question</button>
+                    </th>
+                  </tr>
+                </a>
+                <tr>
+                  <th>5. Workplace Safety & Health</th>
+                </tr>
+                <a id = "FBGeneral Safety">
+                <tr>
+                  <th>General Safety</th>
+                </tr>
+                <% for(var i=0; i<SectionFiveFBGeneralSafety.length; i++) { %>
+                  <tr>
+                    <th>
+                      <textarea
+                        type="text"
+                        class="FBGeneralSafetySectionFiveQn"
+                        placeholder="Enter question here"
+                        cols = "60"
+                        rows = "5"
+                        onkeyup="saveValue(this);"
+                      ><%=SectionFiveFBGeneralSafety[i]%></textarea>
+                      <% if(i == SectionFiveFBGeneralSafety.length-1) { %>
+                        <button type="button" id ="RemoveGeneralSafetyFBQnSectionFive">Remove</button>
+                      <% } %>
+                      <% if(SectionFiveFBGeneralSafety.length <= 1) { %>
+                        <script type = "text/javascript">
+                          window.onload = document.getElementById("RemoveGeneralSafetyFBQnSectionFive").style.visibility = "hidden";
+                        </script>
+                      <% } %>
+                    </th>
+                  </tr>
+                  <% } %>
+                  <tr>
+                    <th>
+                      <button id="AddGeneralSafetyFBQnSectionFive" class="float-right submit-button" >Add Question</button>
+                    </th>
+                  </tr>
+                </a>
+                <a id = "FBFire & Emergency Safety">
+                  <tr>
+                    <th>Fire & Emergency Safety</th>
+                  </tr>
+                  <% for(var i=0; i<SectionFiveFBFireSafety.length; i++) { %>
+                    <tr>
+                      <th>
+                        <textarea
+                          type="text"
+                          class="FBFireSafetySectionFiveQn"
+                          placeholder="Enter question here"
+                          cols = "60"
+                          rows = "5"
+                          onkeyup="saveValue(this);"
+                        ><%=SectionFiveFBFireSafety[i]%></textarea>
+                        <% if(i == SectionFiveFBFireSafety.length-1) { %>
+                          <button type="button" id ="RemoveFireSafetyFBQnSectionFive">Remove</button>
+                        <% } %>
+                        <% if(SectionFiveFBFireSafety.length <= 1) { %>
+                          <script type = "text/javascript">
+                            window.onload = document.getElementById("RemoveFireSafetyFBQnSectionFive").style.visibility = "hidden";
+                          </script>
+                        <% } %>
+                      </th>
+                    </tr>
+                    <% } %>
+                    <tr>
+                      <th>
+                        <button id="AddFireSafetyFBQnSectionFive" class="float-right submit-button" >Add Question</button>
+                      </th>
+                    </tr>
+                  </a>
+                <a id = "FBElectrical Safety">
+                    <tr>
+                      <th>Electrical Safety</th>
+                    </tr>
+                    <% for(var i=0; i<SectionFiveFBElectricalSafety.length; i++) { %>
+                      <tr>
+                        <th>
+                          <textarea
+                            type="text"
+                            class="FBElectricalSafetySectionFiveQn"
+                            placeholder="Enter question here"
+                            cols = "60"
+                            rows = "5"
+                            onkeyup="saveValue(this);"
+                        ><%=SectionFiveFBElectricalSafety[i]%></textarea>
+                          <% if(i == SectionFiveFBElectricalSafety.length-1) { %>
+                            <button type="button" id ="RemoveElectricalSafetyFBQnSectionFive">Remove</button>
+                          <% } %>
+                          <% if(SectionFiveFBElectricalSafety.length <= 1) { %>
+                            <script type = "text/javascript">
+                              window.onload = document.getElementById("RemoveElectricalSafetyFBQnSectionFive").style.visibility = "hidden";
+                            </script>
+                          <% } %>
+                        </th>
+                      </tr>
+                      <% } %>
+                      <tr>
+                        <th>
+                          <button id="AddElectricalSafetyFBQnSectionFive" class="float-right submit-button" >Add Question</button>
+                        </th>
+                      </tr>
+                  <tr>
+                    <th>
+                      <input style="float:right; margin-right:0px;" class="btn btn-success" type="submit" value="Update Checklist Questions" />
+                    </th>
+                  </tr>
+                </a>
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+    <!-- end container -->
+    <script type="text/javascript">
+      document.getElementById("AddNFBProfessionalismQnSectionOne").onclick = function () {
+          location.href = "/AddQuestion/NFBSectionOne/Professionalism";
+          return false;
+      };
+      document.getElementById("AddNFBStaffHygieneQnSectionOne").onclick = function () {
+          location.href = "/AddQuestion/NFBSectionOne/Staff Hygiene";
+          return false;
+      };
+      document.getElementById("AddNFBGECQnSectionTwo").onclick = function () {
+          location.href = "/AddQuestion/NFBSectionTwo/General Environment Cleanliness";
+          return false;
+      };
+      document.getElementById("AddNFBGeneralSafetyQnSectionThree").onclick = function () {
+          location.href = "/AddQuestion/NFBSectionThree/General Safety";
+          return false;
+      };
+      document.getElementById("AddNFBFireEmergencySafetyQnSectionThree").onclick = function () {
+          location.href = "/AddQuestion/NFBSectionThree/Fire & Emergency Safety";
+          return false;
+      };
+      document.getElementById("AddNFBElectricalSafetyQnSectionThree").onclick = function () {
+          location.href = "/AddQuestion/NFBSectionThree/Electrical Safety";
+          return false;
+      };
+      //Remove qn
+      document.getElementById("RemoveNFBProfessionalismQnSectionOne").onclick = function () {
+          location.href = "/RemoveQuestion/NFBSectionOne/Professionalism";
+          return false;
+      };
+      document.getElementById("RemoveNFBStaffHygieneQnSectionOne").onclick = function () {
+          location.href = "/RemoveQuestion/NFBSectionOne/Staff Hygiene";
+          return false;
+      };
+      document.getElementById("RemoveNFBGECQnSectionTwo").onclick = function () {
+          location.href = "/RemoveQuestion/NFBSectionTwo/General Environment Cleanliness";
+          return false;
+      };
+      document.getElementById("RemoveNFBGeneralSafetyQnSectionThree").onclick = function () {
+          location.href = "/RemoveQuestion/NFBSectionThree/General Safety";
+          return false;
+      };
+      document.getElementById("RemoveNFBFireEmergencySafetyQnSectionThree").onclick = function () {
+          location.href = "/RemoveQuestion/NFBSectionThree/Fire & Emergency Safety";
+          return false;
+      };
+      document.getElementById("RemoveNFBElectricalSafetyQnSectionThree").onclick = function () {
+          location.href = "/RemoveQuestion/NFBSectionThree/Electrical Safety";
+          return false;
+      };
+
+      //Add F&B Section
+      document.getElementById("AddProfessionalismFBQnSectionOne").onclick = function () {
+          location.href = "/AddQuestion/FBSectionOne/Professionalism";
+          return false;
+      };
+      document.getElementById("AddStaffHygieneFBQnSectionOne").onclick = function () {
+          location.href = "/AddQuestion/FBSectionOne/Staff Hygiene";
+          return false;
+      };
+      document.getElementById("AddGECFBQnSectionTwo").onclick = function () {
+          location.href = "/AddQuestion/FBSectionTwo/General Environment Cleanliness";
+          return false;
+      };
+      document.getElementById("AddHHFFBQnSectionTwo").onclick = function () {
+          location.href = "/AddQuestion/FBSectionTwo/Hand Hygiene Facilities";
+          return false;
+      };
+      document.getElementById("AddStoragePrepFBQnSectionThree").onclick = function () {
+          location.href = "/AddQuestion/FBSectionThree/Storage & Preparation of Food";
+          return false;
+      };
+      document.getElementById("AddStorageFridgeOrWarmerFBQnSectionThree").onclick = function () {
+          location.href = "/AddQuestion/FBSectionThree/Storage of Food in Refrigerator or Warmer";
+          return false;
+      };
+      document.getElementById("AddFoodFBQnSectionFour").onclick = function () {
+          location.href = "/AddQuestion/FBSectionFour/Food";
+          return false;
+      };
+      document.getElementById("AddBeverageFBQnSectionFour").onclick = function () {
+          location.href = "/AddQuestion/FBSectionFour/Beverage";
+          return false;
+      };
+      document.getElementById("AddGeneralSafetyFBQnSectionFive").onclick = function () {
+          location.href = "/AddQuestion/FBSectionFive/General Safety";
+          return false;
+      };
+      document.getElementById("AddFireSafetyFBQnSectionFive").onclick = function () {
+          location.href = "/AddQuestion/FBSectionFive/Fire & Emergency Safety";
+          return false;
+      };
+      document.getElementById("AddElectricalSafetyFBQnSectionFive").onclick = function () {
+          location.href = "/AddQuestion/FBSectionFive/Electrical Safety";
+          return false;
+      };
+      document.getElementById("RemoveProfessionalismFBQnSectionOne").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionOne/Professionalism";
+          return false;
+      };
+      document.getElementById("RemoveStaffHygieneFBQnSectionOne").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionOne/Staff Hygiene";
+          return false;
+      };
+      document.getElementById("RemoveGECFBQnSectionTwo").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionTwo/General Environment Cleanliness";
+          return false;
+      };
+      document.getElementById("RemoveHHFFBQnSectionTwo").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionTwo/Hand Hygiene Facilities";
+          return false;
+      };
+      document.getElementById("RemoveStoragePrepFBQnSectionThree").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionThree/Storage & Preparation of Food";
+          return false;
+      };
+      document.getElementById("RemoveStorageFridgeOrWarmerFBQnSectionThree").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionThree/Storage of Food in Refrigerator or Warmer";
+          return false;
+      };
+      document.getElementById("RemoveFoodFBQnSectionFour").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionFour/Food";
+          return false;
+      };
+      document.getElementById("RemoveBeverageFBQnSectionFour").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionFour/Beverage";
+          return false;
+      };
+      document.getElementById("RemoveGeneralSafetyFBQnSectionFive").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionFive/General Safety";
+          return false;
+      };
+      document.getElementById("RemoveFireSafetyFBQnSectionFive").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionFive/Fire & Emergency Safety";
+          return false;
+      };
+      document.getElementById("RemoveElectricalSafetyFBQnSectionFive").onclick = function () {
+          location.href = "/RemoveQuestion/FBSectionFive/Electrical Safety";
+          return false;
+      };
+      
+  </script>
+    <script>
+      var list1 = document.getElementsByClassName("NFBProfessionalismSectionOneQn");
+      var list2 = document.getElementsByClassName("NFBStaffHygieneSectionOneQn");
+      var list3 = document.getElementsByClassName("NFBGECSectionTwoQn");
+      var list4 = document.getElementsByClassName("NFBGeneralSafetySectionThreeQn");
+      var list5 = document.getElementsByClassName("NFBFireEmergencySafetySectionThreeQn");
+      var list6 = document.getElementsByClassName("NFBElectricalSafetySectionThreeQn");
+
+      var fblist1 = document.getElementsByClassName("FBProfessionalismSectionOneQn");
+      var fblist2 = document.getElementsByClassName("FBStaffHygieneSectionOneQn");
+      var fblist3 = document.getElementsByClassName("FBGECSectionTwoQn");
+      var fblist4 = document.getElementsByClassName("FBHHFSectionTwoQn");
+      var fblist5 = document.getElementsByClassName("FBStoragePrepSectionThreeQn");
+      var fblist6 = document.getElementsByClassName("FBStorageFridgeOrWarmerSectionThreeQn");
+      var fblist7 = document.getElementsByClassName("FBFoodSectionFourQn");
+      var fblist8 = document.getElementsByClassName("FBBeverageSectionFourQn");
+      var fblist9 = document.getElementsByClassName("FBGeneralSafetySectionFiveQn");
+      var fblist10 = document.getElementsByClassName("FBFireSafetySectionFiveQn");
+      var fblist11 = document.getElementsByClassName("FBElectricalSafetySectionFiveQn");
+
+      for(var i = 0; i < list1.length;i++)
+      {
+        list1[i].name = "NFBProfessionalismSectionOneQn[" + (i + 1) + "]";
+        list1[i].id = "NFBProfessionalismSectionOneQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < list2.length;i++)
+      {
+        list2[i].name = "NFBStaffHygieneSectionOneQn[" + (i + 1) + "]";
+        list2[i].id = "NFBStaffHygieneSectionOneQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < list3.length;i++)
+      {
+        list3[i].name = "NFBGECSectionTwoQn[" + (i + 1) + "]";
+        list3[i].id = "NFBGECSectionTwoQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < list4.length;i++)
+      {
+        list4[i].name = "NFBGeneralSafetySectionThreeQn[" + (i + 1) + "]";
+        list4[i].id = "NFBGeneralSafetySectionThreeQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < list5.length;i++)
+      {
+        list5[i].name = "NFBFireEmergencySafetySectionThreeQn[" + (i + 1) + "]";
+        list5[i].id = "NFBFireEmergencySafetySectionThreeQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < list6.length;i++)
+      {
+        list6[i].name = "NFBElectricalSafetySectionThreeQn[" + (i + 1) + "]";
+        list6[i].id = "NFBElectricalSafetySectionThreeQn[" + (i + 1) + "]";
+      }
+
+      for(var i = 0; i < fblist1.length;i++)
+      {
+        fblist1[i].name = "FBProfessionalismSectionOneQn[" + (i + 1) + "]";
+        fblist1[i].id = "FBProfessionalismSectionOneQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist2.length;i++)
+      {
+        fblist2[i].name = "FBStaffHygieneSectionOneQn[" + (i + 1) + "]";
+        fblist2[i].id = "FBStaffHygieneSectionOneQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist3.length;i++)
+      {
+        fblist3[i].name = "FBGECSectionTwoQn[" + (i + 1) + "]";
+        fblist3[i].id = "FBGECSectionTwoQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist4.length;i++)
+      {
+        fblist4[i].name = "FBHHFSectionTwoQn[" + (i + 1) + "]";
+        fblist4[i].id = "FBHHFSectionTwoQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist5.length;i++)
+      {
+        fblist5[i].name = "FBStoragePrepSectionThreeQn[" + (i + 1) + "]";
+        fblist5[i].id = "FBStoragePrepSectionThreeQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist6.length;i++)
+      {
+        fblist6[i].name = "FBStorageFridgeOrWarmerSectionThreeQn[" + (i + 1) + "]";
+        fblist6[i].id = "FBStorageFridgeOrWarmerSectionThreeQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist7.length;i++)
+      {
+        fblist7[i].name = "FBFoodSectionFourQn[" + (i + 1) + "]";
+        fblist7[i].id = "FBFoodSectionFourQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist8.length;i++)
+      {
+        fblist8[i].name = "FBBeverageSectionFourQn[" + (i + 1) + "]";
+        fblist8[i].id = "FBBeverageSectionFourQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist9.length;i++)
+      {
+        fblist9[i].name = "FBGeneralSafetySectionFiveQn[" + (i + 1) + "]";
+        fblist9[i].id = "FBGeneralSafetySectionFiveQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist10.length;i++)
+      {
+        fblist10[i].name = "FBFireSafetySectionFiveQn[" + (i + 1) + "]";
+        fblist10[i].id = "FBFireSafetySectionFiveQn[" + (i + 1) + "]";
+      }
+      for(var i = 0; i < fblist11.length;i++)
+      {
+        fblist11[i].name = "FBElectricalSafetySectionFiveQn[" + (i + 1) + "]";
+        fblist11[i].id = "FBElectricalSafetySectionFiveQn[" + (i + 1) + "]";
+      }
+    </script>
+
+    <script type="text/javascript">
+      for(var i = 0; i < document.getElementsByClassName("NFBProfessionalismSectionOneQn").length; i++)
+      {
+        var idName = "NFBProfessionalismSectionOneQn[" + [i + 1] + "]";
+        //if(document.getElementById(idName).value == "")
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+      for(var i = 0; i < document.getElementsByClassName("NFBStaffHygieneSectionOneQn").length; i++)
+      {
+        var idName = "NFBStaffHygieneSectionOneQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("NFBGECSectionTwoQn").length; i++)
+      {
+        var idName = "NFBGECSectionTwoQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("NFBGeneralSafetySectionThreeQn").length; i++)
+      {
+        var idName = "NFBGeneralSafetySectionThreeQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("NFBFireEmergencySafetySectionThreeQn").length; i++)
+      {
+        var idName = "NFBFireEmergencySafetySectionThreeQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("NFBElectricalSafetySectionThreeQn").length; i++)
+      {
+        var idName = "NFBElectricalSafetySectionThreeQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+      //FB
+      for(var i = 0; i < document.getElementsByClassName("FBProfessionalismSectionOneQn").length; i++)
+      {
+        var idName = "FBProfessionalismSectionOneQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBStaffHygieneSectionOneQn").length; i++)
+      {
+        var idName = "FBStaffHygieneSectionOneQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBGECSectionTwoQn").length; i++)
+      {
+        var idName = "FBGECSectionTwoQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBHHFSectionTwoQn").length; i++)
+      {
+        var idName = "FBHHFSectionTwoQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBStoragePrepSectionThreeQn").length; i++)
+      {
+        var idName = "FBStoragePrepSectionThreeQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBStorageFridgeOrWarmerSectionThreeQn").length; i++)
+      {
+        var idName = "FBStorageFridgeOrWarmerSectionThreeQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBFoodSectionFourQn").length; i++)
+      {
+        var idName = "FBFoodSectionFourQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBBeverageSectionFourQn").length; i++)
+      {
+        var idName = "FBBeverageSectionFourQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBGeneralSafetySectionFiveQn").length; i++)
+      {
+        var idName = "FBGeneralSafetySectionFiveQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBFireSafetySectionFiveQn").length; i++)
+      {
+        var idName = "FBFireSafetySectionFiveQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      for(var i = 0; i < document.getElementsByClassName("FBElectricalSafetySectionFiveQn").length; i++)
+      {
+        var idName = "FBElectricalSafetySectionFiveQn[" + [i + 1] + "]";
+        if(getSavedValue(idName) != "")
+        document.getElementById(idName).value = getSavedValue(idName);    // set the value to this input
+      }
+
+      //Save the value function - save it to localStorage as (ID, VALUE)
+      function saveValue(e){
+          var id = e.id;  // get the sender's id to save it . 
+          var val = e.value; // get the value. 
+          localStorage.setItem(id, val);// Every time user writing something, the localStorage's value will override . 
+      }
+
+      //get the saved value function - return the value of "v" from localStorage. 
+      function getSavedValue  (v){
+          if (!localStorage.getItem(v)) {
+              return "";// You can change this to your defualt value. 
+          }
+          return localStorage.getItem(v);
+      }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1518 @@
+<%- include("./partials/ViewHeader-NFB") %>
+ <link
+ rel="stylesheet"
+ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link
+ rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/fullpage.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="ui main text container">
+  <br>
+  <br>
+<button type="button" class="btn btn-success btn-lg" onclick="GenPDF()">Download PDF</button>
+<button type="button" class="btn btn-warning btn-lg" onclick="GenMessage()" data-toggle="modal" data-target="#myModal" >Share Link</button>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Email Link to Checklist</h4>
+      </div>
+      <div class="modal-body">
+  
+      <label for="receiverEmail">To</label>
+      <span class="help-block"  id="userEmailError" >Please check the email address format.</span>
+  <input class="modal-input" type="text" id="receiverEmail" name="receiverEmail"  onblur="checkUserEmail()">
+ 
+  <label for="subject">Subject</label>
+  <input class="modal-input" type="text" id="subject" name="subject" >
+
+ 
+
+  <label for="message">Message</label>
+  <textarea class="modal-input" id="message" name="message" style="height:200px"></textarea>
+
+
+      
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" id="sendEmail" onclick="ShareLink()" data-dismiss="modal" disabled>Send</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<form
+class="ui form"
+id='form'
+method="post">
+<br>
+<br>
+
+<div class="ui huge header"><%= FBName %>  F&B Audit Checklist </div>
+
+     
+    <tr>
+ 
+    <td><h4>Name of checklist:  <%= FBName %></h4></td>
+    
+  </tr>
+  <tr>
+    <td><h4>Instituion:      
+    <%= FBinstituteName %></h4>
+      
+    
+    </td>
+  </tr>
+  <tr>
+    
+    <td> <h4>Retail Tenant:  <%= FBrentalName%></h4></td>
+         
+    </td>
+  </tr>
+</tr>
+<tr>
+ 
+  <td><h4>Date:   
+    <%= FBauditSubmissionDate%></h4>
+      </td>
+ 
+</tr>
+  <table>
+    <input
+      type="hidden"
+      name="checklist[sessionEmail]"
+  
+    />
+    <tr >
+      <th>1. Professionalism & Staff Hygiene (20%)</th>
+      <th>Point(s) Awarded</th>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Professionalism</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[1]" class="questions1">      
+        <%= FBData[0]%>
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[2]" class="questions1" >
+         
+        <%= FBData[1]%>
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[3]" class="questions1">
+        <%= FBData[2]%>
+      </td>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Staff Hygiene</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[4]" class="questions1" >
+        <%= FBData[3]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[5]" class="questions1">
+        <%= FBData[4]%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[6]" class="questions1">
+        <%= FBData[5]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[7]" class="questions1">
+         
+        <%= FBData[6]%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[8]" class="questions1">
+        <%= FBData[7]%>
+         
+      </td>
+    </tr>
+    <tr  >
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[9]" class="questions1" >
+         
+        <%= FBData[8]%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[10]"
+      class="questions1">
+        
+      <%= FBData[9]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[11]"
+      class="questions1">
+        
+      <%= FBData[10]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[12]"
+      class="questions1">
+        
+      <%= FBData[11]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit..</p>
+      </td>
+      <td name="checklist[13]"
+      class="questions1">
+        
+          
+      <%= FBData[12]%>
+         
+      </td>
+    </tr>
+    <tr style="background-color: #dddddd;">
+      <td class = "greenTr">Score:</td>
+      <td class = "greenTr">
+      <%= FBSectionOneTotal%>
+      </td>
+  </table>
+  <table> 
+    <tr class="html2pdf__page-break"  style= "background-color: #dddddd">
+     <h5> Remarks:       <%= FBSectionOneRemarks%></h5>
+    
+    
+ 
+    </tr>
+  </table>
+  <img id="SectionOneImage"   height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+  <img id="SectionOneImage2"  class="html2pdf__page-break"  height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+  <table> 
+    <tr>
+      <th>2. Lorem, ipsum dolor sit amet consectetur adipisicing elit. (40%)</th>
+      <th>Point(s) Awarded</th>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+    <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[14]"
+      class="questions2">
+      <%= FBData[13]%>
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td  name="checklist[15]"
+      class="questions2">
+     
+      <%= FBData[14]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[16]"
+      class="questions2">
+      <%= FBData[15]%>
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td  name="checklist[17]"
+      class="questions2">
+        
+      <%= FBData[16]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[18]"
+      class="questions2">
+        
+          
+      <%= FBData[17]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[19]"
+      class="questions2"
+     >
+     <%= FBData[18]%>
+          
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[20]"
+      class="questions2">
+        
+      <%= FBData[19]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[21]"
+      class="questions2">
+      <%= FBData[20]%>
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[22]"
+      class="questions2">
+        
+      <%= FBData[21]%>
+          
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[23]"
+      class="questions2">
+        
+      <%= FBData[22]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td      name="checklist[24]"
+      class="questions2">
+      <%= FBData[23]%>
+   
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[25]"
+      class="questions2">
+      <%= FBData[24]%>
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[26]"
+      class="questions2">
+        
+      <%= FBData[25]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[27]"
+      class="questions2">
+        
+      <%= FBData[26]%>
+         
+         
+      </td>
+    </tr>
+    <tr >
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>➢ WLorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p>➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p>
+          ➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+      </td>
+      <td  name="checklist[28]"
+      class="questions2">
+      <%= FBData[27]%>
+         
+         
+         
+      </td>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Lorem, ipsum dolor </td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[29]"
+      class="questions2">
+        
+      <%= FBData[28]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td    name="checklist[30]"
+      class="questions2">
+        
+      <%= FBData[29]%>
+         
+         
+      </td>
+    </tr>
+    <tr style="background-color: #dddddd;">
+      <td class = "greenTr">Score:</td>
+      <td class = "greenTr">
+      <%=  FBSectionTwoTotal%>
+      </td> </tr>
+  </table>
+  <table> 
+    <tr class="html2pdf__page-break"   style= "background-color: #dddddd">
+     <h5> Remarks:       <%= FBSectionTwoRemarks%></h5>
+    
+    
+ 
+    </tr>
+  </table>
+  <img id="SectionTwoImage"  height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+  <img id="SectionTwoImage2"  class="html2pdf__page-break" height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+  <table> 
+    <tr>
+      <th>Lorem, ipsum dolor sit amet(35%)</th>
+      <th>Point(s) Awarded</th>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Storage & Preparation of Food</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[31]"
+      class="questions3">
+      <%= FBData[30]%>
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>
+          ➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+      </td>
+      <td name="checklist[32]"
+      class="questions3">
+      <%= FBData[31]%>
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[33]"
+      class="questions3">
+        
+          
+      <%= FBData[32]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[34]"
+      class="questions3">
+        
+          
+      <%= FBData[33]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[35]"
+      class="questions3">
+        
+      <%= FBData[34]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[36]"
+      class="questions3">
+        
+         
+      <%= FBData[35]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[37]"
+      class="questions3">
+        
+          
+         
+      <%= FBData[36]%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>
+          ➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+      </td>
+      <td name="checklist[38]"
+      class="questions3">
+        
+      <%= FBData[37]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[39]"
+      class="questions3">
+        
+      <%= FBData[38]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[40]"
+      class="questions3">
+        
+      <%= FBData[39]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[41]"
+      class="questions3"
+     >
+     <%= FBData[40]%>
+          
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[42]"
+      class="questions3">
+        
+      <%= FBData[41]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[43]"
+      class="questions3">
+        
+      <%= FBData[42]%>
+         
+         
+      </td>
+    </tr>
+    <tr  >
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>
+          ➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+      </td>
+      <td  name="checklist[44]"
+      class="questions3">
+        
+      <%= FBData[43]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[45]"
+      class="questions3">
+      <%= FBData[44]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[46]"
+      class="questions3">
+        
+      <%= FBData[45]%>    
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[47]"
+      class="questions3">
+        
+      <%= FBData[46]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[48]"
+      class="questions3">
+        
+      <%= FBData[47]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td   name="checklist[49]"
+      class="questions3">
+        
+      <%= FBData[48]%>
+         
+         
+      </td>
+    </tr>
+    <tr   >
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[50]"
+      class="questions3">
+        
+          
+      <%= FBData[49]%>
+         
+      </td>
+    </tr>
+    <tr class="html2pdf__page-break">
+      <td>PLorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[51]"
+      class="questions3"
+     >
+     <%= FBData[50]%>
+          
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit..</p>
+      </td>
+      <td   name="checklist[52]"
+      class="questions3">
+        
+      <%= FBData[51]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[53]"
+      class="questions3">
+        
+      <%= FBData[52]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[54]"
+      class="questions3">
+        
+      <%= FBData[53]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[55]"
+      class="questions3"
+     >
+     <%= FBData[54]%>
+          
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td     name="checklist[56]"
+      class="questions3">
+        
+      
+      <%= FBData[55]%>
+         
+      </td>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">SLorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[57]"
+      class="questions3">
+        
+         
+      <%= FBData[56]%>
+         
+      </td>
+    </tr>
+    <tr  >
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td     name="checklist[58]"
+      class="questions3">
+        
+      
+      <%= FBData[57]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[59]"
+      class="questions3">
+        
+      <%= FBData[58]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[60]"
+      class="questions3">
+        
+      <%= FBData[59]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>➢ FLorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </td>
+      <td    name="checklist[61]"
+      class="questions3">
+        
+      <%= FBData[60]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </td>
+      <td name="checklist[62]"
+      class="questions3">
+        
+      <%= FBData[61]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>➢ Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </td>
+      <td name="checklist[63]"
+      class="questions3">
+        
+      <%= FBData[62]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[64]"
+      class="questions3">
+        
+          
+      <%= FBData[63]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[65]"
+      class="questions3">
+        
+          
+      <%= FBData[64]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td   name="checklist[66]"
+      class="questions3">
+        
+      <%= FBData[65]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td           name="checklist[67]"
+      class="questions3">
+        
+      <%= FBData[66]%>
+         
+         
+      </td>
+    </tr>
+    <tr style="background-color: #dddddd;">
+      <td class = "greenTr">Score:</td>
+      <td class = "greenTr">
+
+      <%= FBSectionThreeTotal%>
+      </td>
+    </tr>
+  </table>
+  <table> 
+    <tr class="html2pdf__page-break"  style= "background-color: #dddddd">
+     <h5> Remarks:       <%= FBSectionThreeRemarks%></h5>
+
+ 
+    </tr>
+  </table>
+  <img id="SectionThreeImage"  height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+  <img id="SectionThreeImage2"  class="html2pdf__page-break" height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+  <table> 
+    <tr>
+      <th>
+        4. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </th>
+      <th>Point(s) Awarded</th>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Food</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <p>
+          <br /><strong><u>Lease Term:</u></strong
+          ><br />Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+      </td>
+      <td name="checklist[68]"
+      class="questions4">
+      <%= FBData[67]%>
+          
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td    name="checklist[69]"
+      class="questions4">
+        
+      <%= FBData[68]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td  name="checklist[70]"
+      class="questions4">
+      <%= FBData[69]%>
+         
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td    name="checklist[71]"
+      class="questions4">
+      <%= FBData[70]%>
+       
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td  name="checklist[72]"
+      class="questions4">
+        
+      <%= FBData[71]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>HLorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[73]"
+      class="questions4"
+     >
+        
+     <%= FBData[72]%>
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td   name="checklist[74]"
+      class="questions4"
+       >
+       <%= FBData[73]%>
+      </td>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Beverage</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td    name="checklist[75]"
+      class="questions4">
+        
+      <%= FBData[74]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[76]"
+      class="questions4">
+      <%= FBData[75]%>
+         
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[77]"
+      class="questions4">
+        
+      <%= FBData[76]%>
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        <br />Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[78]"
+      class="questions4"
+     >
+        
+     <%= FBData[77]%> 
+         
+      </td>
+    </tr>
+    <tr style="background-color: #dddddd" >
+      <td class = "greenTr">Score:</td>
+      <td class = "greenTr">
+  
+      <%= FBSectionFourTotal%>
+      </td>
+  </tr>
+  </table>
+  <table> 
+    <tr class="html2pdf__page-break"  style= "background-color: #dddddd">
+     <h5> Remarks:       <%= FBSectionFourRemarks%></h5>
+    
+    
+ 
+    </tr>
+  </table>
+  <img id="SectionFourImage"   height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+  <img id="SectionFourImage2"  class="html2pdf__page-break" height="80%" max-height="400pt"  max-width="670pt"width="80%" /> 
+  <table> 
+    <tr>
+      <th>5. Lorem, ipsum dolor sit amet consectetur adipisicing elit.(20%)</th>
+      <th>Point(s) Awarded</th>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">General Safety</td>
+      <td class = "greenTr"> </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[79]"
+      class="questions5">
+      <%= FBData[78]%> 
+         
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[80]"
+      class="questions5">
+        
+      <%= FBData[79]%> 
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td    name="checklist[81]"
+      class="questions5">
+        
+       
+      <%= FBData[80]%> 
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[82]"
+      class="questions5"
+     >
+        
+     <%= FBData[81]%> 
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td   name="checklist[83]"
+      class="questions5">
+        
+      <%= FBData[82]%> 
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td      name="checklist[84]"
+      class="questions5">
+        
+      <%= FBData[83]%> 
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td   name="checklist[85]"
+      class="questions5">
+        
+        
+      <%= FBData[84]%> 
+         
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit..</td>
+      <td  name="checklist[86]"
+      class="questions5">
+        
+      <%= FBData[85]%> 
+         
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td        
+      name="checklist[87]"
+      class="questions5">
+ 
+      <%= FBData[86]%>  
+         
+      </td>
+    </tr>
+    <tr>
+      <td>
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[88]"
+      class="questions5">
+        
+         
+      <%= FBData[87]%> 
+         
+      </td>
+    </tr>
+    <tr >
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[89]"
+      class="questions5">
+      <%= FBData[88]%> 
+          
+      
+      </td>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Fire & Emergency Safety</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td  name="checklist[90]"
+      class="questions5">
+      <%= FBData[89]%> 
+         
+  
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td     name="checklist[91]"
+      class="questions5"
+  >
+  <%= FBData[90]%> 
+    
+         
+      </td>
+    </tr>
+    <tr class="html2pdf__page-break">
+      <td>FLorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td name="checklist[92]"
+      class="questions5">
+      <%= FBData[91]%> 
+          
+          
+       
+       
+      </td>
+    </tr>
+    <tr style="background-color: #add1b0">
+      <td class = "greenTr">Lorem, ipsum dolor s</td>
+      <td class = "greenTr"></td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td   name="checklist[93]"
+      class="questions5">
+        
+      <%= FBData[92]%> 
+     
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td name="checklist[94]"
+      class="questions5"
+    >
+    <%= FBData[93]%> 
+        
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      </td>
+      <td        name="checklist[95]"
+      class="questions5">
+       
+      <%= FBData[94]%> 
+      
+      </td>
+    </tr>
+    <tr>
+      <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+      <td  name="checklist[96]"
+      class="questions5">
+
+       <%= FBData[95]%> 
+    
+      </td>
+     
+    </tr>
+    <tr style="background-color: #dddddd">
+      <td class = "greenTr">Score:</td>
+      <td class = "greenTr">
+
+      <%= FBSectionFiveTotal%> 
+      </td>
+    
+    </tr>
+  </table>
+  <table> 
+    <tr class="html2pdf__page-break"  style= "background-color: #dddddd">
+     <h5> Remarks:       <%= FBSectionFiveRemarks%></h5>
+    
+
+    </tr>
+  </table>
+
+<img id="SectionFiveImage"  height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+<img id="SectionFiveImage2"  height="80%" max-height="400pt"  max-width="670pt"width="80%" />
+</form>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.0/jspdf.umd.min.js" integrity="sha512-GctVjwNNH1cjfoaMyi3WTXq/Y+NDpQ2q+tVPGtNNCgmKiokNiWR68MMYbgaCLg5IgHgZ3dM8EVcmRpJVBLkaiA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.1/html2pdf.bundle.js"></script> 
+<script src='https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js'></script>
+
+
+<script scr='script.js'></script>
+<script>
+var imageOne=<%- JSON.stringify( FBSectionOneImage)%>;
+//console.log(imageOne)
+document.getElementById("SectionOneImage").src=imageOne;
+if (imageOne==""){
+  var imgOne = document.getElementById("SectionOneImage");
+  imgOne.remove();
+}
+var imageTwo=<%- JSON.stringify( FBSectionTwoImage)%>;
+// console.log(imageTwo)
+document.getElementById("SectionTwoImage").src=imageTwo;
+if (imageTwo==""){
+  var imgTwo = document.getElementById("SectionTwoImage");
+  imgTwo.remove();
+}
+var imageThree=<%- JSON.stringify( FBSectionThreeImage)%>;
+//console.log(imageThree)
+document.getElementById("SectionThreeImage").src=imageThree;
+if (imageThree==""){
+  var imgThree = document.getElementById("SectionThreeImage");
+  imgThree.remove();
+}
+var imageFour=<%- JSON.stringify( FBSectionFourImage)%>;
+//console.log(imageThree)
+document.getElementById("SectionFourImage").src=imageFour;
+if (imageFour==""){
+  var imgFour = document.getElementById("SectionFourImage");
+  imgFour.remove();
+}
+var imageFive=<%- JSON.stringify( FBSectionFiveImage)%>;
+//console.log(imageThree)
+document.getElementById("SectionFiveImage").src=imageFive;
+if (imageFive==""){
+  var imgFive = document.getElementById("SectionFiveImage");
+  imgFive.remove();
+}
+var imageOne2=<%- JSON.stringify( FBSectionOneImage2)%>;
+//console.log(imageOne)
+document.getElementById("SectionOneImage2").src=imageOne2;
+if (imageOne2==""){
+  var imgOne2 = document.getElementById("SectionOneImage2");
+  imgOne2.remove();
+}
+var imageTwo2=<%- JSON.stringify( FBSectionTwoImage2)%>;
+// console.log(imageTwo)
+document.getElementById("SectionTwoImage2").src=imageTwo2;
+if (imageTwo2==""){
+  var imgTwo2 = document.getElementById("SectionTwoImage2");
+  imgTwo2.remove();
+}
+var imageThree2=<%- JSON.stringify( FBSectionThreeImage2)%>;
+//console.log(imageThree)
+document.getElementById("SectionThreeImage2").src=imageThree2;
+if (imageThree2==""){
+  var imgThree2 = document.getElementById("SectionThreeImage2");
+  imgThree2.remove();
+}
+var imageFour2=<%- JSON.stringify( FBSectionFourImage2)%>;
+//console.log(imageThree)
+document.getElementById("SectionFourImage2").src=imageFour2;
+if (imageFour2==""){
+  var imgFour2 = document.getElementById("SectionFourImage2");
+  imgFour2.remove();
+}
+var imageFive2=<%- JSON.stringify( FBSectionFiveImage2)%>;
+//console.log(imageThree)
+document.getElementById("SectionFiveImage2").src=imageFive2;
+if (imageFive2==""){
+  var imgFive2 = document.getElementById("SectionFiveImage2");
+  imgFive2.remove();
+}
+  function GenMessage(){
+  var ID=<%- JSON.stringify(dataID)%>;
+  var  sessionLogin=<%- JSON.stringify(sessionLogin)%>;
+  document.getElementById("message").value = 'Link to checklist http://localhost:3000/View-FB/' + ID+ "/"+ sessionLogin; 
+}
+function checkUserEmail(){
+    //gets user input
+    var email = document.getElementById("receiverEmail");
+    //correct email format
+    var userEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var flag;
+    if(email.value.match(userEmailFormate)){
+        flag = false;
+    }else{
+        flag = true;
+    }
+    //if input email doesn't match the correct email format, text to prompt user to input an email with a correct format is displayed 
+    if(flag){
+        document.getElementById("userEmailError").style.display = "block";
+        document.getElementById('receiverEmail').style.borderColor = "red";
+        document.getElementById("sendEmail").disabled = true;
+    }else{//if input email matches the correct email format, text to prompt user is not displayed
+        document.getElementById("userEmailError").style.display = "none";
+        document.getElementById('receiverEmail').style.borderColor = "lightgray";
+        document.getElementById("sendEmail").disabled = false;
+    }
+}
+  function ShareLink(){
+    let receiverEmail= document.getElementById('receiverEmail');
+    let subject= document.getElementById('subject');
+    let message= document.getElementById('message');
+    var userEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var checkUserEmailValid = receiverEmail.value.match(userEmailFormate);
+    if (checkUserEmailValid !=null){
+      document.getElementById("sendEmail").disabled = false;
+    let contactInfo = {
+      receiverEmail:receiverEmail.value,
+      subject:subject.value,
+      message:message.value
+    }
+    console.log(contactInfo)
+    var ID=<%- JSON.stringify(dataID)%>;
+    let xhr=new XMLHttpRequest();
+    xhr.open('POST','/sendEmail');
+    xhr.setRequestHeader('content-type','application/json');
+    xhr.onload=function(){
+      console.log(xhr.responseText);
+      if (xhr.responseText=='success'){
+        alert("Email sent.")
+        receiverEmail.value="",
+        subject.value="",
+        message.value=""
+      }else{
+        alert("Error. Email was not sent.")
+        receiverEmail.value="",
+        subject.value="",
+        message.value=""
+      }
+    }
+    xhr.send(JSON.stringify(contactInfo))
+  } else{
+    document.getElementById("userEmailError").style.display = "block";
+    document.getElementById('email').style.borderColor = "red";
+    document.getElementById("sendEmail").disabled = true;
+  }
+
+  }
+   function GenPDF(){
+    event.preventDefault();
+    var name = '<%- JSON.stringify(FBName) %>'
+    var insti = '<%- JSON.stringify(FBinstituteName) %>'
+   
+   var currentDate = new Date()
+   var    day = currentDate.getDate()
+   var  month = currentDate.getMonth() + 1
+   var   year = currentDate.getFullYear()
+   if (month<10){
+     month="0"+month.toString()
+   }
+   else{
+    month=month.toString()
+   }
+   if (day<10){
+     day="0"+day.toString()
+   }
+   else{
+     day=day.toString()
+   }
+   var   date = day + month+ year.toString();
+    console.log(date)
+   // var ten = '<%-  JSON.stringify(FBrentalName, null, 2)%>'
+   //console.log(ten)
+
+       var element = document.getElementById ('form');
+       var opt = {
+   margin:       1,
+   filename:     name+date+'.pdf',
+   image:        { type: 'JPEG', quality: 0.90,},
+   html2canvas:  { scale: 2 },
+   jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+ };
+ 
+ // New Promise-based usage:
+   html2pdf().set(opt).from(element).save();
+
+ 
+   }
+  
+  
+ 
+
+  </script>
+</div>
+<%- include("./partials/footer") %>

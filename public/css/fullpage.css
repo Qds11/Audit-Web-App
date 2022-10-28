@@ -1,0 +1,167 @@
+.modal-input {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */ 
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+  
+  table td,
+  table th,
+  table tr {
+    padding: 0.4rem 0.8rem;
+    text-align: var(--justify-important);
+    font-size: 13px; 
+    
+  }
+
+  label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+.navbar-default {
+    float: right;
+    margin-right: 0px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 130%;
+  }
+  .trans-pre {
+    background: transparent;
+    border: transparent;
+    font-family: arial, sans-serif;
+  }
+  /* Title */
+  .navbar-default .navbar-brand {
+    color: rgb(0, 0, 0);
+  }
+  .navbar-default .navbar-brand:hover,
+  .navbar-default .navbar-brand:focus {
+    color: #5e5e5e;
+  }
+  /* Link */
+  .navbar-default .navbar-nav > li > a {
+    background-color: white;
+    border-radius: 25px;
+    color: black;
+  }
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+    background-color: white;
+    border-radius: 25px;
+    color: orange;
+  }
+  .navbar-default .navbar-nav > .active > a,
+  .navbar-default .navbar-nav > .active > a:hover,
+  .navbar-default .navbar-nav > .active > a:focus {
+    background-color: orange;
+    border-radius: 25px;
+    color: white;
+    /*color: #555;
+background-color: #E7E7E7;*/
+  }
+  /* Remarks Text box*/
+  .remarksTextBox {
+    text-align: left;
+    padding: 0.4em 0.4em 0.4em 0;
+    height: 100px;
+  }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
+
+
+/* Remarks Text box*/
+.remarksTextBox {
+  text-align: left;
+  padding: 0.4em 0.4em 0.4em 0;
+  height: 100px;
+}
+
+.modal-header{
+color:white;
+    background-color: rgba(255, 166, 0, 0.678);
+}
+
+
+
+.help-block{
+    color:red;
+}
+
+@media only screen and (max-width: 780px){
+    .logo img{
+       margin:auto;
+      padding-top: 25px;
+      padding-left: 15px;
+      width: 160px;
+      height: 160px;
+      margin-left: 7%;
+      float: left;
+    }
+    .border1{
+      background-color: rgba(255, 166, 0, 0.678);
+      /*background-color: white;*/
+      width: 100%;
+      height: 10px;
+      }
+    .navbar-default {
+      float: right;
+      margin: auto;
+      margin-right: 10%;
+      margin-top: 00%;
+      background-color: #ffffff;
+      border-color: #ffffff;
+      color: rgb(0, 0, 0);
+      font-size: 90%;
+    }
+    /* Title */
+    .navbar-default .navbar-brand {
+      color: rgb(0, 0, 0);
+    }
+    .navbar-default .navbar-brand:hover,
+    .navbar-default .navbar-brand:focus {
+      color: #5E5E5E;
+    }
+    /* Link */
+    .navbar-default .navbar-nav > li > a {
+      background-color: white;
+      border-radius:25px;
+      color: black;
+    }
+    .navbar-default .navbar-nav > li > a:hover,
+    .navbar-default .navbar-nav > li > a:focus {
+      background-color: white;
+      border-radius:25px;
+      color: orange;
+    }
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+      background-color: orange;
+      border-radius:25px;
+      color: white;
+      /*color: #555;
+      background-color: #E7E7E7;*/
+    }
+  }
+}

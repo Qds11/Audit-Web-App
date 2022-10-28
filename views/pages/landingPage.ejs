@@ -1,0 +1,109 @@
+<html></html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SingHealth</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/landingPage.css">
+</head>
+<body>
+  <div class="row">
+    <div class="header">
+      <div class="logo">
+        <div class="col-sm-4">
+          <a href="/landingPage"><img src="/Images/logo.png" alt="SingHealth Logo" /></a>
+          <!--<li>please add a link for this picture to return to landing page</li>-->
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <nav class="navbar navbar-default">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/landingPage">Home</a></li>
+            <li><a href="/F&B-ChecklistSectionOne">Create New F&B Checklist</a></li>
+            <li><a href="/Non-F&B-ChecklistSectionOne">Create New Non-F&B Checklist</a></li>
+            <!-- <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Create New Checklist
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                  <li><a href="/F&B-ChecklistSectionOne">F&B Checklist</a></li>
+                  <li><a href="/Non-F&B-ChecklistSectionOne">Non-F&B Checklist</a></li>
+          
+                </ul>
+              </li>-->
+            <li><a href="/F&B-History">History</a></li>
+            <li><a href="login">Log Out</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="border1"></div>
+    <div class="show">
+        
+       <h1>Please Fill in the Checklist</h1>
+       
+       
+       <img src="Images/show.jpg"/>
+       
+       <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Create New Checklist
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="/F&B-ChecklistSectionOne">F&B Checklist</a></li>
+          <li><a href="/Non-F&B-ChecklistSectionOne">Non-F&B Checklist</a></li>
+         
+        </ul>
+      </div>
+      <div class="summary">
+        <!--<li>please add a link for this button to return to create a new checklist</li>-->
+        <ul class="list-group">
+ 
+          <li class="list-group-item list-group-item-danger ">
+            Recently Created F&B Checklist
+            <!--<span class="badge badge-primary badge-pill">Score</span>-->
+            </li>
+            
+            <% for(var i=0; i<FNBLandingPageData.length; i++) { %>
+             <li class="list-group-item d-flex justify-content-between align-items-center">
+               <!--<span class="badge badge-primary badge-pill">14</span>-->
+               <%=FNBLandingPageData[i]%>
+             </li>
+             <% } %>
+    
+            <li class="list-group-item list-group-item-danger ">
+              Recently Created Non-F&B Checklist
+              <!--<span class="badge badge-primary badge-pill">Score</span>-->
+            </li>
+    
+            <% for(var i=0; i<NonFNBLandingPageData.length; i++) { %>
+             <li class="list-group-item d-flex justify-content-between align-items-center">
+               <!--<span class="badge badge-primary badge-pill">14</span>-->
+               <%=NonFNBLandingPageData[i]%>
+             </li>
+             <% } %>
+ 
+       </ul>
+       <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+       </div>
+     </div>
+    <div class="border2"></div>
+    <div class="footer">
+        <!--Copyright&copy2020
+        <br />
+        E-main:sample@sample.com
+        <br />
+        Tel:123456789
+        <br/>-->
+    </div>
+</body>
+<script>
+  localStorage.clear();
+</script>
+</html>

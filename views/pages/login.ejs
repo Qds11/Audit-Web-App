@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase Server Auth</title>
+    <link rel="stylesheet" href="css/login.css" />
+    <script
+      src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"
+      defer
+    ></script>
+    <script
+      src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
+      defer
+    ></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  </head>
+  <body>
+    <main  class="container-fluid">    
+      <img src="Images/singhealthLogo_login.png" alt="logo" />
+        <form id="login" class="container-fluid">
+          <h2>Login Form</h2>
+          <div class="form-group">
+          <label class="text-danger ml-1">Email</label>
+          <div class="input-group">   
+            <span class="input-group-addon"><i class=
+              "glyphicon glyphicon-user"></i></span>
+          <input type="text" name="login"  class="form-control" placeholder="mail@mail.com"/>
+          
+        </div>
+        <div class="form-group">
+          <label class="text-danger ml-1">Password</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i 
+              class="glyphicon glyphicon-lock"></i></span>
+          <input type="password" class="form-control" name="password" placeholder="password"/>
+        </div>
+      
+        </div>
+        <button class="btn btn-warning btn-block"><span class="glyphicon glyphicon-log-in"></span> Log in</button>
+          
+         <!-- <p>Do not have an account yet? Sign up here: <a href="signup">
+            <strong>Sign Up</strong></a></p>   -->
+            
+            <p class="forgetpass"> <a href="forgetpass">
+              Forgot password?</a></p>   
+        </form>
+     
+   
+      <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          const firebaseConfig = {
+            apiKey: "AIzaSyDNwNQbCspC6Wzjgu9eb9nQAp2Le2MIVJk",
+            authDomain: "auditchecklist-fc4ff.firebaseapp.com",
+            databaseURL: "https://auditchecklist-fc4ff.firebaseio.com",
+            projectId: "auditchecklist-fc4ff",
+            storageBucket: "auditchecklist-fc4ff.appspot.com",
+            messagingSenderId: "559220723165",
+            appId: "1:559220723165:web:b3b9d01676fc415538fa34",
+            measurementId: "G-2C7Z3FHH89",
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+          document
+            .getElementById("login")
+            .addEventListener("submit", (event) => {
+              event.preventDefault();
+              const login = event.target.login.value;
+              const password = event.target.password.value;
+              console.log(login);
+              firebase
+                .auth()
+                .signInWithEmailAndPassword(login, password)
+                .then(({ user }) => {
+                  return user.getIdToken().then((idToken) => {
+                    return fetch("/sessionLogin", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                      },
+                      body: JSON.stringify({ idToken, login , password}),
+                    });
+                  });
+                })
+                .then(() => {
+                  //return firebase.auth().signOut();
+                })
+                .then((success) => {
+                  window.location.assign("/landingPage");
+                }).catch((error) => {
+                        //Handle Errors here.
+                    //message box to indicate error in account creation
+                    alert("Please check you email/password inputs.")
+              });
+              return false;
+            });
+
+        })
+      </script>
+    </main>
+  </body>
+</html>
